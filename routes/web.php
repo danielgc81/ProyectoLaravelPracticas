@@ -19,5 +19,5 @@ Route::get('/inicio', function () {
 // Rutas encargadas del ciclo de autententicación de usuarios: nuevas cuentas, inicio de sesión y cierre de sesión
 Route::post('/register-validated', [LoginController::class, 'register'])->name('register-validated');
 Route::post('/log-in', [LoginController::class, 'login'])->name('log-in');
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 

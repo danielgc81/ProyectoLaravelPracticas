@@ -7,5 +7,12 @@
 </head>
 <body>
    <h1>AQUI HABRÁ MUCHOS LIBROS</h1>
+
+<!-- Este Boton de cierre de sesión es de PRUEBA -->
+   <a href="{{ route('logout') }}">
+      <button type="button">
+         Salir
+      </button>
+   </a>
 </body>
 </html>

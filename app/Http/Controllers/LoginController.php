@@ -24,7 +24,7 @@ class LoginController extends Controller
 
       Auth::login($user);
 
-      return redirect(route('inicio'));
+      return redirect()->route('inicio');
    }
 
    // Valida las credenciales y autentica al usuario
@@ -34,6 +34,9 @@ class LoginController extends Controller
 
    // Cierra la sesión activa del usuario autenticado
    public function logout (Request $request) {
-
+      Auth::logout();
+      $request->session()->invalidate();
+      $request->session()->regenerateToken();
+      return redirect()->route('login');
    }
 }
