@@ -6,7 +6,8 @@
    <title>Document</title>
 </head>
 <body>
-   <h1>AQUI HABRÁ MUCHOS LIBROS</h1>
+   <h1>Hola,@auth {{ Auth::user()->name }} @endauth</h1>
+   <p>AQUI HABRÁ MUCHOS LIBROS</p>
 
 <!-- Este Boton de cierre de sesión es de PRUEBA -->
    <a href="{{ route('logout') }}">

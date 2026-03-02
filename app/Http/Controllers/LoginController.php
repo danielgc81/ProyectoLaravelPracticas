@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Requests\Auth\RegisterRequest;
+use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\Request;
 
 // ** Controlador encargado de gestionar el ciclo de autenticaciónde usuarios **
@@ -28,8 +29,19 @@ class LoginController extends Controller
    }
 
    // Valida las credenciales y autentica al usuario
-   public function login (Request $request) {
+   public function login (LoginRequest $request) {
+      $credentials = $request->only('email', 'password');
 
+      $remember = ($request->has('remember') ? true : false);
+
+      if (Auth::attempt($credentials, $remember)) {
+         $request->session()->regenerate();
+         return redirect()->intended(route('inicio'));
+      }
+      
+      return back()->withErrors([
+         'credentials' => 'El email o contraseña no es válido'
+      ]);
    }
 
    // Cierra la sesión activa del usuario autenticado

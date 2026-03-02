@@ -10,6 +10,9 @@
    <main class="flex">
       <form method="POST" action="{{ route('log-in') }}">
          @csrf
+         @error('credentials')
+            <p>{{ $message }}</p>
+         @enderror
          <div class="">
             <label for="email">Email</label>
             <input id="email" type="email" name="email" required>
