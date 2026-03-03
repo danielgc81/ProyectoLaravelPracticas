@@ -7,7 +7,7 @@
    @vite('resources/css/app.css')
 </head>
 <body>
-   <main class="flex">
+   <main class="">
       <form method="POST" action="{{ route('log-in') }}">
          @csrf
          @error('credentials')

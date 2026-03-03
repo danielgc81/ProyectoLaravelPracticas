@@ -25,7 +25,7 @@ class LoginController extends Controller
 
       Auth::login($user);
 
-      return redirect()->route('inicio');
+      return redirect()->route('libros.index');
    }
 
    // Valida las credenciales y autentica al usuario
@@ -36,9 +36,9 @@ class LoginController extends Controller
 
       if (Auth::attempt($credentials, $remember)) {
          $request->session()->regenerate();
-         return redirect()->intended(route('inicio'));
+         return redirect()->intended(route('libros.index'));
       }
-      
+
       return back()->withErrors([
          'credentials' => 'El email o contraseña no es válido'
       ]);
