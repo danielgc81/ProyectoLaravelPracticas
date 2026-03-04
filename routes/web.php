@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\LibroController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ValoracionController;
 
 // Rutas solo invitados (usuarios no autenticados)
 Route::middleware('guest')->group(function () {
@@ -18,6 +19,7 @@ Route::middleware('guest')->group(function () {
 // Rutas solo autenticados
 Route::middleware('auth')->group(function () {
    Route::resource('libros', LibroController::class);
+   Route::resource('valoraciones', ValoracionController::class);
 
    // Ruta encargada de cierre de sesión
    Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
