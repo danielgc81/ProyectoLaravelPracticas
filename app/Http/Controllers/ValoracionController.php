@@ -6,6 +6,7 @@ use App\Http\Requests\Valoracion\CreateValoracionRequest;
 use App\Models\Valoracion;
 use App\Services\ValoracionService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ValoracionController extends Controller
 {
@@ -33,7 +34,9 @@ class ValoracionController extends Controller
     */
    public function store(CreateValoracionRequest $request)
    {
-      $this->service->create($request->validated());
+      $data = $request->validated();
+      $data['user_id'] = Auth::id();
+      $this->service->create($data);
 
       return redirect()->route('libros.show', $request->libro_id)->with('message', 'Gracias por su opinión!');
    }

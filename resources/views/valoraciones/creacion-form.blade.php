@@ -38,7 +38,6 @@
       </div>
 
       <input type="hidden" name="libro_id" value="{{ $libro_id }}">
-      <input type="hidden" name="user_id" value="{{ Auth::id() }}">
       <button type="submit" class="bg-[#D4A373] py-1.5 px-3 rounded-2xl">Enviar</button>
    </form>
    <a href="{{route('libros.show', $libro_id)}}">Volver</a>

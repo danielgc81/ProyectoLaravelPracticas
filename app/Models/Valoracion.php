@@ -12,4 +12,8 @@ class Valoracion extends Model
       'comentario',
       'estrellas'
    ];
+
+   public function user () {
+      return $this->belongsTo(User::class);
+   }
 }

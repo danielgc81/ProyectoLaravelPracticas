@@ -9,6 +9,7 @@
 <body>
    <img src="{{ $libro->image }}" alt="Portada {{ $libro->title }}">
    @foreach ($valoraciones as $valoracion)
+      <p>{{ $valoracion->user->name }}</p>
       <p>{{ $valoracion->comentario }}</p>
       <p>{{ $valoracion->estrellas }}</p>
    @endforeach

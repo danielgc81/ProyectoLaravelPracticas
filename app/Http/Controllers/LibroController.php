@@ -43,7 +43,7 @@ class LibroController extends Controller
    public function show(int $id)
    {
       $libro = $this->service->find($id);
-      $valoraciones = $libro->valoraciones()->latest()->get();
+      $valoraciones = $libro->valoraciones()->with('user')->latest()->get();
 
       return view('libros.libro', compact('libro', 'valoraciones'));
    }
