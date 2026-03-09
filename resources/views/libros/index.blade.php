@@ -7,19 +7,29 @@
    @vite('resources/css/app.css')
 </head>
 <body class="flex flex-col justify-center items-center min-h-screen">
-   <h1>Hola,@auth {{ Auth::user()->name }} @endauth</h1>
-   <main class="max-w-7xl grid grid-cols-5">
+   <nav class="bg-white w-full border-b border-b-[#004d42] p-4 mb-9 sticky top-0">
+      <div class="max-w-7xl mx-auto flex justify-between items-center">
+         <h1 class="text-[#004d42] text-4xl">Hola,@auth {{ Auth::user()->name }} @endauth</h1>
+         <div class="flex items-center p-2 rounded-md transition hover:bg-gray-300">
+            <img src="https://images.icon-icons.com/602/PNG/512/Gender_Neutral_User_icon-icons.com_55902.png" alt="@auth {{ Auth::user()->name }} @endauth" class="w-8 h-8">
+            <span class="text-[#004d42] ml-1.5">Mi Cuenta</span>
+         </div>
+      </div>
+   </nav>
+   <main class="max-w-7xl grid grid-cols-5 gap-y-5">
       @foreach($libros as $libro)
-         <article class="max-w-70 border border-[#023020] overflow-hidden bg-[#D4A373]">
-            <img src="{{ $libro->image }}" alt="Portada {{ $libro->title }}"
-               class="w-full p-1.5 rounded-xl object-cover">
-            <div class="p-3 flex flex-col gap-1">
-               <h3 class="text-lg uppercase font-bold truncate text-[#023020]">
+         <article class="max-w-70 border border-[#e8e9ed] overflow-hidden flex flex-col">
+            <div class="h-96">
+               <img src="{{ $libro->image }}" alt="Portada {{ $libro->title }}"
+                  class="w-full h-96 p-6 rounded-xl object-cover">
+            </div>
+            <div class="px-5 pb-7 flex flex-col gap-1 flex-1">
+               <h3 class="text-lg uppercase truncate font-semibold text-[#023020]">
                   {{ $libro->title }}
                </h3>
-               <p class="text-xs truncate underline text-[#2d6a4f]">{{ $libro->author }}</p>
+               <p class="truncate text-[#004d42]">{{ $libro->author }}</p>
             </div>
-            <a href="{{ route('libros.show', $libro->id) }}">Ver valoraciones</a>
+            <a href="{{ route('libros.show', $libro->id) }}" class="bg-[#ebab21] py-2.5 px-5 uppercase rounded-md self-end mb-5 mr-5">Ver Libro</a>
          </article>
       @endforeach
    </main>

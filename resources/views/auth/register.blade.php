@@ -7,10 +7,10 @@
    @vite('resources/css/app.css')
 </head>
 <body>
-   <main class="bg-red-400 h-dvh flex justify-center items-center">
+   <main class="h-dvh flex justify-center items-center from-0% bg-linear-to-b from-[#004d42] to-90% to-[#ebab21]">
       <form method="POST" action="{{ route('register-validated') }}" class="bg-gray-100 flex flex-col p-3.5 w-96 rounded-2xl shadow-xl">
          @csrf
-         <h1 class="text-3xl font-bold self-center m-2.5">Registrarse</h1>
+         <h1 class="text-3xl font-bold self-center m-3">Registrarse</h1>
          <div class="flex flex-col mb-4">
             <label for="user" class="mb-1.5">Nombre de Usuario</label>
             <input id="user" type="text" name="name" required class="bg-white py-1.5 px-3 rounded-xl focus:outline-none text-gray-600">
@@ -32,8 +32,8 @@
                <span class="text-red-500 text-xs mt-1">{{ $message }}</span>
             @enderror
          </div>
-         <button type="submit" class="bg-red-500 outline-2 outline-red-500 py-4 rounded-4xl text-white font-bold mb-4 cursor-pointer">Registrarse</button>
-         <a href="{{ route('login') }}" class="py-4 rounded-4xl text-red-500 outline-2 outline-red-500 font-bold mb-4 cursor-pointer text-center">Log in</a>
+         <button type="submit" class="bg-[#ebab21] outline-2 outline-[#ebab21] py-4 rounded-4xl text-black font-bold mb-4 cursor-pointer">Registrarse</button>
+         <a href="{{ route('login') }}" class="py-4 rounded-4xl text-[#ebab21] outline-2 outline-[#ebab21] font-bold mb-4 cursor-pointer text-center">Log in</a>
       </form>
    </main>
 </body>
