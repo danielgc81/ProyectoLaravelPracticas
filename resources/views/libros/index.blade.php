@@ -3,7 +3,7 @@
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Document</title>
+   <title>Descubre libros, personas ...</title>
    @vite('resources/css/app.css')
    <script>
       // Abre/cierra el account al hacer click en "Mi Cuenta"

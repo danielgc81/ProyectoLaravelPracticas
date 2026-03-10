@@ -23,7 +23,7 @@ class CreateValoracionRequest extends FormRequest
    {
       return [
          'libro_id'   => ['required', 'integer', 'exists:libros,id'],
-         'comentario' => ['required', 'string'],
+         'comentario' => ['string', 'nullable'],
          'estrellas'  => ['required', 'integer', 'min:1', 'max:5'],
       ];
    }
