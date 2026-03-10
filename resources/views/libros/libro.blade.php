@@ -21,6 +21,7 @@
 <body>
    <nav class="bg-white w-full border-b border-b-[#004d42] p-4 mb-9 sticky top-0">
       <div class="max-w-7xl mx-auto flex justify-between items-center">
+         <h1 class="text-[#004d42] text-4xl">Hola,@auth {{ Auth::user()->name }} @endauth</h1>
          <div class="relative">
             <div onclick="toggleMenu()" class="flex items-center p-2 rounded-md transition hover:bg-gray-300 cursor-pointer">
                <img src="https://images.icon-icons.com/602/PNG/512/Gender_Neutral_User_icon-icons.com_55902.png" alt="@auth {{ Auth::user()->name }} @endauth" class="w-8 h-8">
