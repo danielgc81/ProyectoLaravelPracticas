@@ -1,15 +1,14 @@
 <?php
 namespace App\Services;
 
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use App\Models\Libro;
 
 class LibroService {
 
-   public function getAll (): LengthAwarePaginator {
-      $query = Libro::latest();
+   public function getAll () {
+      $query = Libro::latest()->get();
 
-      return $query->paginate(Libro::PAGINATE);
+      return $query;
    }
 
    public function find (int $id): Libro {

@@ -16,6 +16,7 @@
          </div>
       </div>
    </nav>
+   <!-- Informacion del libro -->
    <section class="max-w-4xl flex mx-auto gap-4">
       <div class="w-3xs">
          <img src="{{ $libro->image }}" alt="Portada {{ $libro->title }}">
@@ -37,11 +38,22 @@
          </div>
       </div>
    </section>
+   <!-- Informacion de las valoraciones -->
    <section class="max-w-4xl fle flex-col mt-20 mx-auto">
+      <!-- Media valoraciones -->
+      <div class="flex items-center gap-4 mb-8">
+         <div class="flex mx-auto text-4xl">
+            @for ($i = 1; $i <= 5; $i++)
+            <span class="{{ $i <= round($valoraciones->avg('estrellas')) ? 'text-[#f5a623]' : 'text-gray-300' }}">★</span>
+            @endfor
+            <p class="ml-4 text-4xl font-bold">{{ number_format($valoraciones->avg('estrellas'), 1) }}/5</p>
+         </div>
+      </div>
       <div class="flex justify-between mb-4">
          <h3 class="text-2xl uppercase text-[#004d42]">¿Que opina la gente...?</h3>
          <p class="text-[#737373] font-light">{{$valoraciones->count()}} {{ $valoraciones->count() === 1 ? 'opinión de usuarios' : 'opiniones de usuarios' }}</p>
       </div>
+      <!-- Valoracion de usuario  -->
       @foreach ($valoraciones as $valoracion)
       <article class="flex gap-10 mb-4 border-y-2 p-3 border-[#e8e9ed]">
          <div class="mt-4">

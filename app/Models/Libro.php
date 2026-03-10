@@ -16,8 +16,6 @@ class Libro extends Model
       'image',
    ];
 
-   public const PAGINATE = 20;
-
    public function valoraciones() {
       return $this->hasMany(Valoracion::class);
    }
