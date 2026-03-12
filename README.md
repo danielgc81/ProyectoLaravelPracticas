@@ -89,6 +89,12 @@ DB_PASSWORD=
 php artisan migrate
 ```
 
+**5.3** Ejecuta los datos de pruebas para los libros
+
+```bash
+php artisan db:seed --class=BookSeeder
+```
+
 ---
 
 ## Paso 6 — Crear el enlace de almacenamiento
