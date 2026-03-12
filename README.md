@@ -118,3 +118,14 @@ Abre Laravel Herd y vete a Sites->Add Site->Link existing project y seleccionas 
 ```
 
 ---
+
+## Rutas de la Aplicación
+
+| Ruta | Acceso | Descripción |
+|------|--------|-------------|
+| `/login` | Invitado | Formulario de inicio de sesión |
+| `/register` | Invitado | Formulario de registro de usuario |
+| `/libros` | Autenticado | Lista todos los libros |
+| `/libros/{id}` | Autenticado | Detalle de un libro concreto: Se accede a través del boton "Ver Libro" |
+| `/valoraciones/create?libro_id={id}` | Autenticado | Formulario para valorar un libro: Se accede a traves del boton "Dejar Mi Opinion" en `libros/{id}` |
+
