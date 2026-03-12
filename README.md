@@ -14,7 +14,7 @@ Antes de empezar, asegúrate de tener instalado lo siguiente:
 | Composer | última |
 | Node.js + npm | >= 18 |
 | Git | última |
-| Laragon *(recomendado)* o XAMPP | última |
+| Herd | última |
 
 ---
 
