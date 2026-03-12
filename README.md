@@ -1,59 +1,112 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Instalación del Proyecto Laravel
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+> Guía paso a paso para instalar y ejecutar el proyecto en tu ordenador local.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Requisitos Previos
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Antes de empezar, asegúrate de tener instalado lo siguiente:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+| Herramienta | Versión mínima | Descarga |
+|-------------|---------------|---------|
+| PHP | >= 8.1 |
+| Composer | última |
+| Node.js + npm | >= 18 |
+| Git | última |
+| Laragon *(recomendado)* o XAMPP | última |
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## Paso 1 — Clonar el repositorio
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Abre una terminal en la carpeta donde quieras instalar el proyecto y ejecuta:
 
-## Laravel Sponsors
+```bash
+git clone https://github.com/danielgc81/ProyectoLaravelPracticas.git
+cd ProyectoLaravelPracticas
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+---
 
-### Premium Partners
+## Paso 2 — Instalar dependencias de PHP
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+Este comando descarga todas las librerías PHP que necesita el proyecto (definidas en `composer.json`):
 
-## Contributing
+```bash
+composer install
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+---
 
-## Code of Conduct
+## Paso 3 — Instalar dependencias de JavaScript
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Este comando descarga los paquetes de Node y luego compila los assets (CSS, JS):
 
-## Security Vulnerabilities
+```bash
+npm install
+npm run build
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
 
-## License
+## Paso 4 — Configurar el archivo de entorno (.env)
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+El archivo `.env` contiene la configuración privada del proyecto (base de datos, claves, etc.).
+
+**4.1** Copia el archivo de ejemplo:
+
+```bash
+cp .env.example .env
+```
+
+**4.2** Genera la clave de la aplicación (obligatorio):
+
+```bash
+php artisan key:generate
+```
+
+**4.3** Abre el archivo `.env` con cualquier editor de texto y busca la sección de base de datos. Modifica estas líneas:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=laravel
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+---
+
+## Paso 5 — Crear la base de datos y ejecutar migraciones
+
+**5.1** Crea la base de datos manualmente en tu gestor (phpMyAdmin, TablePlus, DBeaver, etc.) con el **mismo nombre** que escribiste en `DB_DATABASE` del `.env`.
+
+**5.2** Ejecuta las migraciones para crear todas las tablas:
+
+```bash
+php artisan migrate
+```
+
+---
+
+## Paso 6 — Crear el enlace de almacenamiento
+
+Este paso es necesario para que las imágenes y archivos subidos sean accesibles desde el navegador:
+
+```bash
+php artisan storage:link
+```
+
+---
+
+## Paso 7 — Iniciar el servidor con Laravel Herd
+
+Abre Laravel Herd y vete a Sites->Add Site->Link existing project y seleccionas el proyecto laravel y ya tendría que funcionar, pon en tu navegador esta URL:
+
+```txt
+   proyectolaravelpracticas.test
+```
+
+---

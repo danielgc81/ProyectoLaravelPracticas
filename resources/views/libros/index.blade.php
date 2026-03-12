@@ -18,7 +18,7 @@
       });
    </script>
 </head>
-<body class="flex flex-col justify-center items-center min-h-screen">
+<body class="flex flex-col items-center min-h-screen">
    <nav class="bg-white w-full border-b border-b-[#004d42] p-4 mb-9 sticky top-0">
       <div class="max-w-7xl mx-auto flex justify-between items-center">
          <h1 class="text-[#004d42] text-4xl">Hola,@auth {{ Auth::user()->name }} @endauth</h1>
