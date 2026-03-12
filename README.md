@@ -95,7 +95,7 @@ php artisan migrate
 php artisan db:seed --class=BookSeeder
 ```
 
-> Los usuarios no tienen un seeder sino que se crean en la ruta `/register`. LAs valoraciones tampoco tienen seeder, primero inicia sesión con un usuario registrado, entra en un libro y haz click sobre el boton "Dejar mi Opinión" y rellena el formulario de valoración que aparece.
+> Los usuarios no tienen un seeder sino que se crean en la ruta `/register`. Las valoraciones tampoco tienen seeder, primero inicia sesión con un usuario registrado, entra en un libro y haz click sobre el boton "Dejar mi Opinión" y rellena el formulario de valoración que aparece.
 
 ---
 
