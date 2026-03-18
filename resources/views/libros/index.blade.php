@@ -21,7 +21,12 @@
 <body class="flex flex-col items-center min-h-screen">
    <nav class="bg-white w-full border-b border-b-[#004d42] p-4 mb-9 sticky top-0">
       <div class="max-w-7xl mx-auto flex justify-between items-center">
-         <h1 class="text-[#004d42] text-4xl">Hola,@auth {{ Auth::user()->name }} @endauth</h1>
+         <!-- Issue #3 -->
+         <!-- Creacion del logo el cual lo reemplazamos por "Hola, Ejemplo" -->
+         <a href="{{ auth()->check() ? route('libros.index') : route('welcome') }}"> <!-- Esta ruta welcome la solucionare en la issue #1 -->
+            <img src="{{ asset('storage/logo.png') }}" alt="Logo de CloudBook" class="w-64">
+         </a>
+
          <div class="relative">
             <div onclick="toggleMenu()" class="flex items-center p-2 rounded-md transition hover:bg-gray-300 cursor-pointer">
                <img src="https://images.icon-icons.com/602/PNG/512/Gender_Neutral_User_icon-icons.com_55902.png" alt="@auth {{ Auth::user()->name }} @endauth" class="w-8 h-8">
@@ -43,22 +48,28 @@
          </div>
       </div>
    </nav>
-   <main class="max-w-7xl grid grid-cols-5 gap-y-5">
-      @foreach($libros as $libro)
-         <article class="max-w-70 border border-[#e8e9ed] overflow-hidden flex flex-col">
-            <div class="h-96">
-               <img src="{{ $libro->image }}" alt="Portada {{ $libro->title }}"
-                  class="w-full h-96 p-6 rounded-xl object-cover">
-            </div>
-            <div class="px-5 pb-7 flex flex-col gap-1 flex-1">
-               <h3 class="text-lg uppercase truncate font-semibold text-[#023020]">
-                  {{ $libro->title }}
-               </h3>
-               <p class="truncate text-[#004d42]">{{ $libro->author }}</p>
-            </div>
-            <a href="{{ route('libros.show', $libro->id) }}" class="bg-[#ebab21] py-2.5 px-5 uppercase rounded-md self-end mb-5 mr-5">Ver Libro</a>
-         </article>
-      @endforeach
+   <main class="max-w-7xl mb-10">
+      <div class="flex justify-between">
+         <h1 class="mb-5 text-2xl text-[#004d42]">Bienvenido a CloudBook, @auth {{ Auth::user()->name }} @endauth</h1>
+         <p class="text-[#737373] font-light text-xl">{{$libros->count()}} {{ $libros->count() === 1 ? 'libro encontrado' : 'libros encontrados' }}</p>
+      </div>
+      <div class="grid grid-cols-5 gap-y-5">
+         @foreach($libros as $libro)
+            <article class="max-w-70 border border-[#e8e9ed] overflow-hidden flex flex-col">
+               <div class="h-96">
+                  <img src="{{ $libro->image }}" alt="Portada {{ $libro->title }}"
+                     class="w-full h-96 p-6 rounded-xl object-cover">
+               </div>
+               <div class="px-5 pb-7 flex flex-col gap-1 flex-1">
+                  <h3 class="text-lg uppercase truncate font-semibold text-[#023020]">
+                     {{ $libro->title }}
+                  </h3>
+                  <p class="truncate text-[#004d42]">{{ $libro->author }}</p>
+               </div>
+               <a href="{{ route('libros.show', $libro->id) }}" class="bg-[#ebab21] py-2.5 px-5 uppercase rounded-md self-end mb-5 mr-5">Ver Libro</a>
+            </article>
+         @endforeach
+      </div>
    </main>
 </body>
 </html>

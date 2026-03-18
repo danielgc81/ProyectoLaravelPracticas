@@ -21,7 +21,10 @@
 <body>
    <nav class="bg-white w-full border-b border-b-[#004d42] p-4 mb-9 sticky top-0">
       <div class="max-w-7xl mx-auto flex justify-between items-center">
-         <h1 class="text-[#004d42] text-4xl">Hola,@auth {{ Auth::user()->name }} @endauth</h1>
+         <a href="{{ auth()->check() ? route('libros.index') : route('welcome') }}"> <!-- Esta ruta welcome la solucionare en la issue #1 -->
+            <img src="{{ asset('storage/logo.png') }}" alt="Logo de CloudBook" class="w-64">
+         </a>
+
          <div class="relative">
             <div onclick="toggleMenu()" class="flex items-center p-2 rounded-md transition hover:bg-gray-300 cursor-pointer">
                <img src="https://images.icon-icons.com/602/PNG/512/Gender_Neutral_User_icon-icons.com_55902.png" alt="@auth {{ Auth::user()->name }} @endauth" class="w-8 h-8">
@@ -66,7 +69,7 @@
       </div>
    </section>
    <!-- Informacion de las valoraciones -->
-   <section class="max-w-4xl fle flex-col mt-20 mx-auto">
+   <section class="max-w-4xl fle flex-col mt-20 mx-auto mb-10">
       <!-- Media valoraciones -->
       <div class="flex items-center gap-4 mb-8">
          <div class="flex mx-auto text-4xl">
