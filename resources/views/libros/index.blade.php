@@ -33,24 +33,35 @@
                <span class="text-[#004d42] ml-1.5">Mi Cuenta</span>
             </div>
             <div id="account" class="hidden absolute right-0 mt-2 w-56 border bg-white border-[#e8e9ed] rounded-md shadow-lg p-3">
-               <!-- Este enlace es pura estetica -->
-               <a href="" class="block py-1 hover:text-[#004d42]">Mis datos</a>
+               @auth
+                     <a href="" class="block py-1 hover:text-[#004d42]">Mis datos</a>
 
-               <hr class="my-2">
+                     <hr class="my-2">
 
-               <a href="{{ route('logout') }}" class="flex items-center gap-2">
-                  <img src="https://cdn-icons-png.flaticon.com/128/5565/5565704.png" alt="Cerrar sesion" class="w-5 h-5">
-                  <button type="button" class="text-red-500 cursor-pointer">
-                     Salir
-                  </button>
-               </a>
+                     <a href="{{ route('logout') }}" class="flex items-center gap-2">
+                        <img src="https://cdn-icons-png.flaticon.com/128/5565/5565704.png" alt="Cerrar sesion" class="w-5 h-5">
+                        <button type="button" class="text-red-500 cursor-pointer">
+                           Salir
+                        </button>
+                     </a>
+                  @endauth
+                  @guest
+                     <a href="{{ route('register') }}" class="block w-full bg-white outline-2 outline-[#f5a623] text-[#f5a623] uppercase text-center rounded-4xl py-1">Registrarse</a>
+                     <hr class="my-3">
+                     <a href="{{ route('login') }}" class="block w-full bg-[#f5a623] outline-2 outline-[#f5a623] uppercase text-center rounded-4xl py-1">Login</a>
+                  @endguest
             </div>
          </div>
       </div>
    </nav>
    <main class="max-w-7xl mb-10">
-      <div class="flex justify-between">
-         <h1 class="mb-3 text-2xl text-[#004d42]">Bienvenido a CloudBook, @auth {{ Auth::user()->name }} @endauth</h1>
+      <div class="flex justify-between mb-3">
+         @auth
+            <h1 class="text-2xl text-[#004d42]">Bienvenido a CloudBook, @auth {{ Auth::user()->name }} @endauth</h1>
+         @endauth
+         @guest
+         <h1></h1>
+         @endguest
          <p class="text-[#737373] font-light text-xl">{{$libros->count()}} {{ $libros->count() === 1 ? 'libro encontrado' : 'libros encontrados' }}</p>
       </div>
       <div class="grid grid-cols-5 gap-y-5">
