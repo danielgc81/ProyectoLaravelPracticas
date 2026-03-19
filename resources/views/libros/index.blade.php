@@ -3,7 +3,7 @@
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Descubre libros, personas ...</title>
+   <title>CloudBook: Descubre libros, personas ...</title>
    @vite('resources/css/app.css')
    <script>
       // Abre/cierra el account al hacer click en "Mi Cuenta"
@@ -50,7 +50,7 @@
    </nav>
    <main class="max-w-7xl mb-10">
       <div class="flex justify-between">
-         <h1 class="mb-5 text-2xl text-[#004d42]">Bienvenido a CloudBook, @auth {{ Auth::user()->name }} @endauth</h1>
+         <h1 class="mb-3 text-2xl text-[#004d42]">Bienvenido a CloudBook, @auth {{ Auth::user()->name }} @endauth</h1>
          <p class="text-[#737373] font-light text-xl">{{$libros->count()}} {{ $libros->count() === 1 ? 'libro encontrado' : 'libros encontrados' }}</p>
       </div>
       <div class="grid grid-cols-5 gap-y-5">
