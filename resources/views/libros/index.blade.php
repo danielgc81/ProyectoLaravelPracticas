@@ -34,7 +34,7 @@
             </div>
             <div id="account" class="hidden absolute right-0 mt-2 w-56 border bg-white border-[#e8e9ed] rounded-md shadow-lg p-3">
                @auth
-                     <a href="" class="block py-1 hover:text-[#004d42]">Mis datos</a>
+                     <a href="{{route('user.show', Auth::user()->id)}}" class="block py-1 hover:text-[#004d42]">Mis datos</a>
 
                      <hr class="my-2">
 

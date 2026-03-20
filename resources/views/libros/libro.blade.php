@@ -32,7 +32,7 @@
             </div>
             <div id="account" class="hidden absolute right-0 mt-2 w-56 border bg-white border-[#e8e9ed] rounded-md shadow-lg p-3">
                   @auth
-                     <a href="" class="block py-1 hover:text-[#004d42]">Mis datos</a>
+                     <a href="{{route('user.show', Auth::user()->id)}}" class="block py-1 hover:text-[#004d42]">Mis datos</a>
 
                      <hr class="my-2">
 
@@ -98,11 +98,11 @@
       @auth
          @foreach ($valoraciones as $valoracion)
          <article class="flex gap-10 mb-4 border-y-2 p-3 border-[#e8e9ed]">
-            <div class="mt-4">
+            <div class="mt-4 shrink-0 w-67.5">
                <p class="font-bold text-xl">{{ $valoracion->user->name }}</p>
                <p class="font-light text-sm">{{ $valoracion->created_at->format('d/m/Y') }}</p>
             </div>
-            <div class="mt-4 mb-4">
+            <div class="mt-4 mb-4 flex-1">
                <div class="flex text-2xl">
                   @for ($i = 1; $i <= 5; $i++)
                      <span class="{{ $i <= $valoracion->estrellas ? 'text-[#f5a623]' : 'text-black'}}">★</span>
