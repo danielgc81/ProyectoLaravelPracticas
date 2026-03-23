@@ -75,7 +75,7 @@
             @guest
                <a href="{{route('valoraciones.create', ['libro_id' => $libro->id])}}" class="bg-[#ebab21] py-2.5 px-5 uppercase rounded-md self-end mb-5 mr-5 pointer-events-none opacity-50">Dejar mi opinión</a>
             @endguest
-            <a href="{{ route('libros.index') }}" class="bg-[#004d42] py-2.5 px-5 uppercase text-white rounded-md self-end mb-5 mr-5 hover:bg-[#003830] transition">Volver</a>
+            <a href="{{ url()->previous() }}" class="bg-[#004d42] py-2.5 px-5 uppercase text-white rounded-md self-end mb-5 mr-5 hover:bg-[#003830] transition">Volver</a>
          </div>
       </div>
    </section>

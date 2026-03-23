@@ -64,6 +64,23 @@
          <div class="flex flex-col">
             <div>
                <form method="GET" action="{{ route('libros.index') }}" class="flex gap-3">
+                  <!-- ISSUE #5 - Select Order By y ASC o DESC -->
+                  <!-- Select criterio -->
+                  <select name="order_by"
+                        class="border border-[#004d42] rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#004d42] cursor-pointer">
+                        <option value="created_at" {{ ($orderBy ?? 'created_at') === 'created_at'  ? 'selected' : '' }}>-</option>
+                        <option value="title" {{ ($orderBy ?? '') === 'title'       ? 'selected' : '' }}>Título A-Z</option>
+                        <option value="author" {{ ($orderBy ?? '') === 'author'      ? 'selected' : '' }}>Autor</option>
+                        <option value="valoraciones" {{ ($orderBy ?? '') === 'valoraciones'? 'selected' : '' }}>Nº Opiniones</option>
+                  </select>
+                  <!-- Select dirección -->
+                  <select name="direction"
+                        class="border border-[#004d42] rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#004d42] cursor-pointer">
+                        <option value="default" {{ ($direction ?? 'default') === 'default' ? 'selected' : '' }}>Por defecto</option>
+                        <option value="asc" {{ ($direction ?? '') === 'asc'  ? 'selected' : '' }}>Ascendente</option>
+                        <option value="desc" {{ ($direction ?? '') === 'desc' ? 'selected' : '' }}>Descendente</option>
+                  </select>
+
                   <input type="text" name="search" value="{{ $search ?? ''}}" placeholder="Buscar por título o autor" maxlength="255"
                      class="flex-1 border w-70 border-[#004d42] rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#004d42]">
                   <button type="submit"

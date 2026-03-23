@@ -17,9 +17,16 @@ class LibroController extends Controller
    public function index(Request $request)
    {
       $search = $request->input('search');
-      $libros = $this->service->getAll($search);
+      $orderBy = $request->input('order_by', 'created_at');
+      $direction = $request->input('direction', 'desc');
 
-      return view('libros.index', compact('libros', 'search'));
+      if ($direction === 'default') {
+         $direction = 'desc';
+      }
+
+      $libros = $this->service->getAll($search, $orderBy, $direction);
+
+      return view('libros.index', compact('libros', 'search', 'orderBy', 'direction'));
    }
 
    /**
