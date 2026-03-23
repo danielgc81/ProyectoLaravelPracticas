@@ -14,7 +14,7 @@
          <h2 class="text-[#004d42] font-bold text-4xl">Tu Biblioteca Virtual</h2>
          <p class="mt-2.5 text-xl text-[#737373]">Descubre libros que te inspiran y conecta con lectores ...</p>
          <div class="flex gap-10 mt-8">
-            <a href="{{ route('login') }}" class="bg-[#ebab21] outline-2 outline-[#ebab21] py-2.5 px-12 uppercase rounded-4xl">Log in</a>
+            <a href="{{ route('login') }}" class="bg-[#ebab21] outline-2 outline-[#ebab21] py-2.5 px-12 uppercase rounded-4xl hover:bg-[#e09520] hover:outline-[#e09520] transtion">Log in</a>
             <a href="{{ route('register') }}" class="bg-white outline-2 outline-[#ebab21] text-[#ebab21] py-2.5 px-5 uppercase rounded-4xl">Registrarse</a>
          </div>
       </div>

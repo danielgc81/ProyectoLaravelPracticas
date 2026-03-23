@@ -46,7 +46,7 @@
                   @guest
                      <a href="{{ route('register') }}" class="block w-full bg-white outline-2 outline-[#f5a623] text-[#f5a623] uppercase text-center rounded-4xl py-1">Registrarse</a>
                      <hr class="my-3">
-                     <a href="{{ route('login') }}" class="block w-full bg-[#f5a623] outline-2 outline-[#f5a623] uppercase text-center rounded-4xl py-1">Login</a>
+                     <a href="{{ route('login') }}" class="block w-full bg-[#f5a623] outline-2 outline-[#f5a623] uppercase text-center rounded-4xl py-1 hover:bg-[#e09520] hover:outline-[#e09520] transtion">Login</a>
                   @endguest
                </div>
          </div>
@@ -70,12 +70,12 @@
          </div>
          <div class="self-end mt-4">
             @auth
-               <a href="{{route('valoraciones.create', ['libro_id' => $libro->id])}}" class="bg-[#ebab21] py-2.5 px-5 uppercase rounded-md self-end mb-5 mr-5">Dejar mi opinión</a>
+               <a href="{{route('valoraciones.create', ['libro_id' => $libro->id])}}" class="bg-[#ebab21] py-2.5 px-5 uppercase rounded-md self-end mb-5 mr-5 hover:bg-[#e09520] transtion">Dejar mi opinión</a>
             @endauth
             @guest
                <a href="{{route('valoraciones.create', ['libro_id' => $libro->id])}}" class="bg-[#ebab21] py-2.5 px-5 uppercase rounded-md self-end mb-5 mr-5 pointer-events-none opacity-50">Dejar mi opinión</a>
             @endguest
-            <a href="{{ route('libros.index') }}" class="bg-[#004d42] py-2.5 px-5 uppercase text-white rounded-md self-end mb-5 mr-5">Volver</a>
+            <a href="{{ route('libros.index') }}" class="bg-[#004d42] py-2.5 px-5 uppercase text-white rounded-md self-end mb-5 mr-5 hover:bg-[#003830] transition">Volver</a>
          </div>
       </div>
    </section>

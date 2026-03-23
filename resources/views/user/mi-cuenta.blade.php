@@ -43,11 +43,6 @@
                         </button>
                      </a>
                   @endauth
-                  @guest
-                     <a href="{{ route('register') }}" class="block w-full bg-white outline-2 outline-[#f5a623] text-[#f5a623] uppercase text-center rounded-4xl py-1">Registrarse</a>
-                     <hr class="my-3">
-                     <a href="{{ route('login') }}" class="block w-full bg-[#f5a623] outline-2 outline-[#f5a623] uppercase text-center rounded-4xl py-1">Login</a>
-                  @endguest
             </div>
          </div>
       </div>
@@ -63,7 +58,7 @@
                <label for="name" class="font-light text-[#737373]">Nombre de usuario</label>
                <div class="mt-4 flex justify-between">
                   <input class="py-1 px-3 border-l border-b rounded-bl-md border-[#004d42] outline-none" type="text" id="name" name="name" maxlength="25" value="{{$user->name}}" required>
-                  <button type="submit" name="form_type" value="name" class="bg-[#ebab21] outline-2 outline-[#ebab21] py-1.5 px-6 text-sm uppercase rounded-4xl cursor-pointer">Actualizar</button>
+                  <button type="submit" name="form_type" value="name" class="bg-[#ebab21] outline-2 outline-[#ebab21] py-1.5 px-6 text-sm uppercase rounded-4xl cursor-pointer hover:bg-[#e09520] hover:outline-[#e09520] transtion">Actualizar</button>
                </div>
                @if($errors->nameErrors->any())
                   @foreach($errors->nameErrors->all() as $error)
@@ -82,7 +77,7 @@
                <label for="email" class="font-light text-[#737373]">Correo electrónico</label>
                <div class="mt-4 flex justify-between">
                   <input class="py-1 px-3 border-l border-b rounded-bl-md border-[#004d42] outline-none" type="email" id="email" name="email" value="{{$user->email}}" required>
-                  <button type="submit" name="form_type" value="email" class="bg-[#ebab21] outline-2 outline-[#ebab21] py-1.5 px-6 text-sm uppercase rounded-4xl cursor-pointer">Actualizar</button>
+                  <button type="submit" name="form_type" value="email" class="bg-[#ebab21] outline-2 outline-[#ebab21] py-1.5 px-6 text-sm uppercase rounded-4xl cursor-pointer hover:bg-[#e09520] hover:outline-[#e09520] transtion">Actualizar</button>
                </div>
                @if($errors->emailErrors->any())
                   @foreach($errors->nameErrors->all() as $error)
@@ -110,7 +105,7 @@
                   <span class="text-xs text-green-500">{{ session('success_password') }}</span>
                @endif
                <div class="flex justify-center">
-                  <button type="submit"  id="btn-password" name="form_type" value="password" class="bg-[#ebab21] mt-3 outline-2 opacity-50 pointer-events-none outline-[#ebab21] py-1.5 px-6 text-sm uppercase rounded-4xl cursor-pointer">Actualizar</button>
+                  <button type="submit"  id="btn-password" name="form_type" value="password" class="bg-[#ebab21] mt-3 outline-2 opacity-50 pointer-events-none outline-[#ebab21] hover:outline-[#e09520] py-1.5 px-6 text-sm uppercase rounded-4xl cursor-pointer hover:bg-[#e09520] transtion">Actualizar</button>
                </div>
             </form>
          </div>
@@ -123,7 +118,7 @@
       const btn = document.getElementById('btn-password');
 
       function checkPasswords() {
-         const match = password.value.length > 8 && password.value === confirmation.value;
+         const match = password.value.length >= 8 && password.value === confirmation.value;
          if (match) {
             btn.style.opacity = '1';
             btn.style.pointerEvents = 'auto';

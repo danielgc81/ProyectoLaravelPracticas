@@ -19,11 +19,9 @@
    </script>
 </head>
 <body class="flex flex-col items-center min-h-screen">
-   <nav class="bg-white w-full border-b border-b-[#004d42] p-4 mb-9 sticky top-0">
+   <nav class="bg-white w-full border-b border-b-[#004d42] p-4 mb-7 sticky top-0">
       <div class="max-w-7xl mx-auto flex justify-between items-center">
-         <!-- Issue #3 -->
-         <!-- Creacion del logo el cual lo reemplazamos por "Hola, Ejemplo" -->
-         <a href="{{ auth()->check() ? route('libros.index') : route('welcome') }}"> <!-- Esta ruta welcome la solucionare en la issue #1 -->
+         <a href="{{ auth()->check() ? route('libros.index') : route('welcome') }}">
             <img src="{{ asset('storage/logo.png') }}" alt="Logo de CloudBook" class="w-64">
          </a>
 
@@ -48,24 +46,53 @@
                   @guest
                      <a href="{{ route('register') }}" class="block w-full bg-white outline-2 outline-[#f5a623] text-[#f5a623] uppercase text-center rounded-4xl py-1">Registrarse</a>
                      <hr class="my-3">
-                     <a href="{{ route('login') }}" class="block w-full bg-[#f5a623] outline-2 outline-[#f5a623] uppercase text-center rounded-4xl py-1">Login</a>
+                     <a href="{{ route('login') }}" class="block w-full bg-[#f5a623] outline-2 outline-[#f5a623] uppercase text-center rounded-4xl py-1 hover:bg-[#e09520] hover:outline-[#e09520] transtion">Login</a>
                   @endguest
             </div>
          </div>
       </div>
    </nav>
-   <main class="max-w-7xl mb-10">
+   <main class="w-7xl max-w-7xl mb-10">
       <div class="flex justify-between mb-3">
          @auth
-            <h1 class="text-2xl text-[#004d42]">Bienvenido a CloudBook, @auth {{ Auth::user()->name }} @endauth</h1>
+         <h1 class="text-2xl text-[#004d42] self-end">Bienvenido a CloudBook, @auth {{ Auth::user()->name }} @endauth</h1>
          @endauth
          @guest
          <h1></h1>
          @endguest
-         <p class="text-[#737373] font-light text-xl">{{$libros->count()}} {{ $libros->count() === 1 ? 'libro encontrado' : 'libros encontrados' }}</p>
+         <!-- ISSUE #4 - Barra de Busqueda -->
+         <div class="flex flex-col">
+            <div>
+               <form method="GET" action="{{ route('libros.index') }}" class="flex gap-3">
+                  <input type="text" name="search" value="{{ $search ?? ''}}" placeholder="Buscar por título o autor" maxlength="255"
+                     class="flex-1 border w-70 border-[#004d42] rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#004d42]">
+                  <button type="submit"
+                        class="bg-[#f5a623] px-6 py-2 rounded-md text-sm uppercase cursor-pointer hover:bg-[#e09520] transtion">
+                        Buscar
+                  </button>
+                  <!-- Tras la busqueda aparecera un boton de limpiar para eliminarla -->
+                  @if(!empty($search))
+                     <a href="{{ route('libros.index') }}" class="bg-gray-200 text-gray-600 px-6 py-2 rounded-md text-sm uppercase hover:bg-gray-300 transition">
+                        Limpiar
+                     </a>
+                  @endif
+               </form>
+            </div>
+
+            <p class="text-[#737373] font-light text-xl self-end mt-1.5">
+               {{$libros->count()}} {{ $libros->count() === 1 ? 'libro encontrado' : 'libros encontrados' }}
+               <!-- Tras la búsqueda actualizara este texto para saber cuantos libros se encontraron con ella -->
+               @if(!empty($search))
+                  <span> para "<strong>{{ $search }}</strong>"</span>
+               @endif
+            </p>
+         </div>
+      </div>
+      <div>
+
       </div>
       <div class="grid grid-cols-5 gap-y-5">
-         @foreach($libros as $libro)
+         @forelse($libros as $libro)
             <article class="max-w-70 border border-[#e8e9ed] overflow-hidden flex flex-col">
                <div class="h-96">
                   <img src="{{ $libro->image }}" alt="Portada {{ $libro->title }}"
@@ -77,9 +104,19 @@
                   </h3>
                   <p class="truncate text-[#004d42]">{{ $libro->author }}</p>
                </div>
-               <a href="{{ route('libros.show', $libro->id) }}" class="bg-[#ebab21] py-2.5 px-5 uppercase rounded-md self-end mb-5 mr-5">Ver Libro</a>
+               <a href="{{ route('libros.show', $libro->id) }}" class="bg-[#ebab21] py-2.5 px-5 uppercase rounded-md self-end mb-5 mr-5 hover:bg-[#e09520] transtion">Ver Libro</a>
             </article>
-         @endforeach
+            @empty
+               @if(!empty($search))
+                     <div class="col-span-5 text-center py-16">
+                        <p class="text-[#004d42] text-3xl font-bold">No se encontraron libros</p>
+                        <p class="text-[#737373] text-sm mt-2 font-light">Prueba con otro título o autor</p>
+                        <a href="{{ route('libros.index') }}" class="inline-block mt-4 bg-[#004d42] text-white px-6 py-2 rounded-md text-sm uppercase hover:bg-[#003830] transition">
+                           Ver todos los libros
+                        </a>
+                     </div>
+               @endif
+         @endforelse
       </div>
    </main>
 </body>

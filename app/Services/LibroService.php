@@ -5,10 +5,19 @@ use App\Models\Libro;
 
 class LibroService {
 
-   public function getAll () {
-      $query = Libro::latest()->get();
+   public function getAll (?string $search = null) {
+      $query = Libro::latest();
 
-      return $query;
+      // Si hay una busqueda aplica el filtro
+      if ($search) {
+         $query->where ( function ($q) use ($search) {
+            // Busqueda por título y autor
+            $q->where('title', 'like', "%{$search}%")
+            ->orWhere('author', 'like', "%{$search}%");
+         });
+      }
+
+      return $query->get();
    }
 
    public function find (int $id): Libro {

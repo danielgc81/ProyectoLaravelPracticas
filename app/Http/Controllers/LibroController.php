@@ -14,11 +14,12 @@ class LibroController extends Controller
    /**
     * Display a listing of the resource.
     */
-   public function index()
+   public function index(Request $request)
    {
-      $libros = $this->service->getAll();
+      $search = $request->input('search');
+      $libros = $this->service->getAll($search);
 
-      return view('libros.index', compact('libros'));
+      return view('libros.index', compact('libros', 'search'));
    }
 
    /**
