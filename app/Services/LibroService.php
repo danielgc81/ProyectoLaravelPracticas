@@ -5,7 +5,7 @@ use App\Models\Libro;
 
 class LibroService {
 
-   public function getAll (?string $search = null, string $orderBy = 'created_at', string $direction = 'desc') {
+   public function getAll (?string $search = null, string $orderBy = 'created_at', string $direction = 'desc', ?string $genre = null) {
       if ($orderBy === 'valoraciones') {
          // Cuando ordenamos por n de valoraciones,
          // este metodo crea una tabla valoraciones_count en cada libro
@@ -20,6 +20,10 @@ class LibroService {
                });
          }
 
+         if ($genre) {
+            $query->where('genre', $genre);
+         }
+
          $query->orderBy('valoraciones_count', $direction);
       } else {
          $query = Libro::latest();
@@ -32,12 +36,20 @@ class LibroService {
                });
          }
 
+         if ($genre) {
+            $query->where('genre', $genre);
+         }
+
          // Este método elimina el orden de latest() y aplica
          // el especificado en sus parámetros
          $query->reorder($orderBy, $direction);
       }
 
       return $query->get();
+   }
+
+   public function getGenres(): array {
+      return Libro::distinct()->orderBy('genre')->pluck('genre')->toArray();
    }
 
    public function find (int $id): Libro {

@@ -53,50 +53,64 @@
       </div>
    </nav>
    <main class="w-7xl max-w-7xl mb-10">
-      <div class="flex justify-between mb-3">
-         @auth
-         <h1 class="text-2xl text-[#004d42] self-end">Bienvenido a CloudBook, @auth {{ Auth::user()->name }} @endauth</h1>
-         @endauth
-         @guest
-         <h1></h1>
-         @endguest
+      <section class="grid grid-cols-2 gap-3 mb-3">
          <!-- ISSUE #4 - Barra de Busqueda -->
-         <div class="flex flex-col">
-            <div>
-               <form method="GET" action="{{ route('libros.index') }}" class="flex gap-3">
-                  <!-- ISSUE #5 - Select Order By y ASC o DESC -->
-                  <!-- Select criterio -->
-                  <select name="order_by"
-                        class="border border-[#004d42] rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#004d42] cursor-pointer">
-                        <option value="created_at" {{ ($orderBy ?? 'created_at') === 'created_at' ? 'selected' : '' }}>Más Reciente</option>
-                        <option value="title" {{ ($orderBy ?? '') === 'title' ? 'selected' : '' }}>Título A-Z</option>
-                        <option value="author" {{ ($orderBy ?? '') === 'author' ? 'selected' : '' }}>Autor</option>
-                        <option value="valoraciones" {{ ($orderBy ?? '') === 'valoraciones'? 'selected' : '' }}>Nº Opiniones</option>
-                  </select>
-                  <!-- Select dirección -->
-                  <select name="direction"
-                        class="border border-[#004d42] rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#004d42] cursor-pointer">
-                        <option value="default" {{ ($direction ?? 'default') === 'default' ? 'selected' : '' }}>Por defecto</option>
-                        <option value="asc" {{ ($direction ?? '') === 'asc' ? 'selected' : '' }}>Ascendente</option>
-                        <option value="desc" {{ ($direction ?? '') === 'desc' ? 'selected' : '' }}>Descendente</option>
-                  </select>
+         <div class="col-span-2 flex justify-end">
+            <form method="GET" action="{{ route('libros.index') }}" class="flex gap-3">
+               <!-- ISSUE #5 - Select Order By y ASC o DESC -->
+               <!-- Select criterio -->
+               <select name="order_by"
+                     onchange="this.form.submit()"
+                     class="border border-[#004d42] rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#004d42] cursor-pointer">
+                  <option value="created_at" {{ ($orderBy ?? 'created_at') === 'created_at' ? 'selected' : '' }}>Más Reciente</option>
+                  <option value="title" {{ ($orderBy ?? '') === 'title' ? 'selected' : '' }}>Título A-Z</option>
+                  <option value="author" {{ ($orderBy ?? '') === 'author' ? 'selected' : '' }}>Autor</option>
+                  <option value="valoraciones" {{ ($orderBy ?? '') === 'valoraciones'? 'selected' : '' }}>Nº Opiniones</option>
+               </select>
+               <!-- Select dirección -->
+               <select name="direction"
+                     onchange="this.form.submit()"
+                     class="border border-[#004d42] rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#004d42] cursor-pointer">
+                  <option value="default" {{ ($direction ?? 'default') === 'default' ? 'selected' : '' }}>Por defecto</option>
+                  <option value="asc" {{ ($direction ?? '') === 'asc' ? 'selected' : '' }}>Ascendente</option>
+                  <option value="desc" {{ ($direction ?? '') === 'desc' ? 'selected' : '' }}>Descendente</option>
+               </select>
 
-                  <input type="text" name="search" value="{{ $search ?? ''}}" placeholder="Buscar por título o autor" maxlength="255"
-                     class="flex-1 border w-70 border-[#004d42] rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#004d42]">
-                  <button type="submit"
-                        class="bg-[#f5a623] px-6 py-2 rounded-md text-sm uppercase cursor-pointer hover:bg-[#e09520] transtion">
-                        Buscar
-                  </button>
-                  <!-- Tras la busqueda aparecera un boton de limpiar para eliminarla -->
-                  @if(!empty($search))
-                     <a href="{{ route('libros.index') }}" class="bg-gray-200 text-gray-600 px-6 py-2 rounded-md text-sm uppercase hover:bg-gray-300 transition">
-                        Limpiar
-                     </a>
-                  @endif
-               </form>
-            </div>
+               <!-- ISSUE #8 - Select categoría o género -->
+               <select name="genre"
+                     onchange="this.form.submit()"
+                     class="border border-[#004d42] rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#004d42] cursor-pointer">
+                  <option value="">Todos los géneros</option>
+                  @foreach ($genres as $g)
+                     <option value="{{ $g }}" {{ ($genre ?? '') === $g ? 'selected' : '' }}>
+                        {{ $g }}
+                     </option>
+                  @endforeach
+               </select>
 
-            <p class="text-[#737373] font-light text-xl self-end mt-1.5">
+               <input type="text" name="search" value="{{ $search ?? ''}}" placeholder="Buscar por título o autor" maxlength="255"
+                  class="w-70 flex-1 border border-[#004d42] rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#004d42]">
+               <button type="submit"
+                     class="bg-[#f5a623] px-6 py-2 rounded-md text-sm uppercase cursor-pointer hover:bg-[#e09520] transtion">
+                     Buscar
+               </button>
+               <!-- Tras la busqueda aparecera un boton de limpiar para eliminarla -->
+               @if(!empty($search))
+                  <a href="{{ route('libros.index') }}" class="bg-gray-200 text-gray-600 px-4 py-2 rounded-md text-sm uppercase hover:bg-gray-300 transition">
+                     Limpiar
+                  </a>
+               @endif
+            </form>
+         </div>
+
+         <div>
+            @auth
+            <h1 class="text-2xl text-[#004d42]">Bienvenido a CloudBook, @auth {{ Auth::user()->name }} @endauth</h1>
+            @endauth
+         </div>
+
+         <div class="text-right">
+            <p class="text-[#737373] font-light text-2xl">
                {{$libros->count()}} {{ $libros->count() === 1 ? 'libro encontrado' : 'libros encontrados' }}
                <!-- Tras la búsqueda actualizara este texto para saber cuantos libros se encontraron con ella -->
                @if(!empty($search))
@@ -104,11 +118,8 @@
                @endif
             </p>
          </div>
-      </div>
-      <div>
-
-      </div>
-      <div class="grid grid-cols-5 gap-y-5">
+      </section>
+      <section class="grid grid-cols-5 gap-y-5">
          @forelse($libros as $libro)
             <article class="max-w-70 border border-[#e8e9ed] overflow-hidden flex flex-col">
                <div class="h-96">
@@ -134,7 +145,7 @@
                      </div>
                @endif
          @endforelse
-      </div>
+      </section>
    </main>
 </body>
 </html>

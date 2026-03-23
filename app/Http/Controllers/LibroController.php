@@ -19,14 +19,16 @@ class LibroController extends Controller
       $search = $request->input('search');
       $orderBy = $request->input('order_by', 'created_at');
       $direction = $request->input('direction', 'desc');
+      $genre = $request->input('genre');
 
       if ($direction === 'default') {
          $direction = 'desc';
       }
 
-      $libros = $this->service->getAll($search, $orderBy, $direction);
+      $libros = $this->service->getAll($search, $orderBy, $direction, $genre);
+      $genres = $this->service->getGenres();
 
-      return view('libros.index', compact('libros', 'search', 'orderBy', 'direction'));
+      return view('libros.index', compact('libros', 'search', 'orderBy', 'direction', 'genre', 'genres'));
    }
 
    /**
