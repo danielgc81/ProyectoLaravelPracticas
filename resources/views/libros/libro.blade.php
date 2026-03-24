@@ -54,8 +54,19 @@
    </nav>
    <!-- Informacion del libro -->
    <section class="max-w-4xl flex mx-auto gap-4">
-      <div class="w-3xs">
-         <img src="{{ $libro->image }}" alt="Portada {{ $libro->title }}">
+      <div class="flex flex-col items-center">
+         <div class="w-3xs">
+            <img src="{{ $libro->image }}" alt="Portada {{ $libro->title }}">
+         </div>
+         <div class="mt-4 flex flex-col">
+            @auth
+               <a href="{{route('valoraciones.create', ['libro_id' => $libro->id])}}" class="bg-[#ebab21] py-2.5 px-5 uppercase rounded-md hover:bg-[#e09520] transtion">Dejar mi opinión</a>
+            @endauth
+            @guest
+               <a href="{{route('valoraciones.create', ['libro_id' => $libro->id])}}" class="bg-[#ebab21] py-2.5 px-5 uppercase rounded-md pointer-events-none opacity-50">Dejar mi opinión</a>
+            @endguest
+            <a href="{{ route('libros.index') }}" class="bg-[#004d42] py-2.5 px-5 uppercase text-white rounded-md hover:bg-[#003830] transition text-center mt-3">Volver</a>
+         </div>
       </div>
       <div class="w-[60%] flex flex-col gap-2">
          <p class="text-3xl font-bold uppercase text-[#004d42]">{{$libro->title}}</p>
@@ -66,28 +77,22 @@
          <span class="bg-[#004d42] w-fit text-white border rounded-md py-1.5 px-2 text-xs">{{$libro->genre}}</span>
          <div class="mt-2">
             <h3 class="font-semibold">Sinopsis de <span class="uppercase">{{$libro->title}}</span></h3>
-            <p class="text-lg mt-1.5">{{$libro->synopsis}}</p>
-         </div>
-         <div class="self-end mt-4">
-            @auth
-               <a href="{{route('valoraciones.create', ['libro_id' => $libro->id])}}" class="bg-[#ebab21] py-2.5 px-5 uppercase rounded-md self-end mb-5 mr-5 hover:bg-[#e09520] transtion">Dejar mi opinión</a>
-            @endauth
-            @guest
-               <a href="{{route('valoraciones.create', ['libro_id' => $libro->id])}}" class="bg-[#ebab21] py-2.5 px-5 uppercase rounded-md self-end mb-5 mr-5 pointer-events-none opacity-50">Dejar mi opinión</a>
-            @endguest
-            <a href="{{ url()->previous() }}" class="bg-[#004d42] py-2.5 px-5 uppercase text-white rounded-md self-end mb-5 mr-5 hover:bg-[#003830] transition">Volver</a>
+            <p class="text-lg mt-1.5 line-clamp-15" id="synopsis-text">{{$libro->synopsis}}</p>
+            <button id="synopsis-toggle" class="hidden text-[#004d42] font-medium mt-1 cursor-pointer" onclick="toggleSynopsis()">
+               Ver más
+            </button>
          </div>
       </div>
    </section>
    <!-- Informacion de las valoraciones -->
-   <section class="max-w-4xl flex flex-col mt-20 mx-auto mb-10">
+   <section class="max-w-4xl flex flex-col mt-10 mx-auto mb-10">
       <!-- Media valoraciones -->
-      <div class="flex items-center gap-4 mb-8">
+      <div class="flex items-center gap-4 mb-5">
          <div class="flex mx-auto text-4xl">
             @for ($i = 1; $i <= 5; $i++)
             <span class="{{ $i <= round($valoraciones->avg('estrellas')) ? 'text-[#f5a623]' : 'text-gray-300' }}">★</span>
             @endfor
-            <p class="ml-4 text-4xl font-bold">{{ number_format($valoraciones->avg('estrellas'), 1) }}/5</p>
+            <p class="ml-4 text-4xl font-bold">{{ $valoraciones->avg('estrellas') == 5 ? '5' : number_format($valoraciones->avg('estrellas'), 1) }}/5</p>
          </div>
       </div>
       <div class="flex justify-between mb-4">
@@ -117,6 +122,21 @@
          <p class="mx-auto"><a href="{{route('register')}}" class="underline text-[#004d42]">Registrate</a> para ver las opiniones o si ya tienes cuenta <a href="{{ route('login') }}" class="underline text-[#004d42]">Inicia Sesión</a></p>
       @endguest
    </section>
+   <script>
+      const synopsis = document.getElementById('synopsis-text');
+      const btn = document.getElementById('synopsis-toggle');
+      let expanded = false;
+
+      if (synopsis.scrollHeight > synopsis.clientHeight) {
+         btn.classList.remove('hidden');
+      }
+
+      function toggleSynopsis() {
+         expanded = !expanded;
+         synopsis.classList.toggle('line-clamp-15', !expanded);
+         btn.textContent = expanded ? 'Ver menos' : 'Ver más';
+      }
+</script>
 </body>
 </html>
 
