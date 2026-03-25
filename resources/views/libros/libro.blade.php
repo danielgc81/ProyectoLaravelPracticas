@@ -19,7 +19,7 @@
    </script>
 </head>
 <body>
-   <nav class="bg-white w-full border-b border-b-[#004d42] p-4 mb-9 sticky top-0">
+   <nav class="bg-white w-full border-b border-b-[#004d42] p-4 mb-2 sticky top-0">
       <div class="max-w-7xl mx-auto flex justify-between items-center">
          <a href="{{ auth()->check() ? route('libros.index') : route('welcome') }}"> <!-- Esta ruta welcome la solucionare en la issue #1 -->
             <img src="{{ asset('storage/logo.png') }}" alt="Logo de CloudBook" class="w-64">
@@ -52,8 +52,15 @@
          </div>
       </div>
    </nav>
+   <div class="w-7xl max-w-7xl mx-auto">
+      <x-breadcrumbs :breadcrumbs="[
+         ['label' => 'Inicio', 'url' => route('welcome')],
+         ['label' => 'Libros', 'url' => route('libros.index')],
+         ['label' => $libro->title, 'url' => route('libros.show', $libro)],
+      ]"/>
+   </div>
    <!-- Informacion del libro -->
-   <section class="max-w-4xl flex mx-auto gap-4">
+   <section class="max-w-4xl flex mx-auto gap-4 mt-6 justify-center">
       <div class="flex flex-col items-center">
          <div class="w-3xs">
             <img src="{{ $libro->image }}" alt="Portada {{ $libro->title }}">

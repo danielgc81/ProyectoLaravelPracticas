@@ -19,7 +19,7 @@
    </script>
 </head>
 <body>
-   <nav class="bg-white w-full border-b border-b-[#004d42] p-4 mb-9 sticky top-0">
+   <nav class="bg-white w-full border-b border-b-[#004d42] p-4 mb-2 sticky top-0">
       <div class="max-w-7xl mx-auto flex justify-between items-center">
          <a href="{{ auth()->check() ? route('libros.index') : route('welcome') }}">
             <img src="{{ asset('storage/logo.png') }}" alt="Logo de CloudBook" class="w-64">
@@ -47,8 +47,14 @@
          </div>
       </div>
    </nav>
+   <div class="ml-14">
+      <x-breadcrumbs :breadcrumbs="[
+      ['label' => 'Inicio', 'url' => route('welcome')],
+      ['label' => 'Mis datos', 'url' => route('user.show', $user)],
+   ]"/>
+   </div>
 <!-- Issue #2 -->
-   <section class="mt-10 ml-15 max-w-sm">
+   <section class="mt-5 ml-15 max-w-sm">
       <h1 class="text-6xl text-[#004d42] font-bold">Mi Cuenta</h1>
       <article class="flex flex-col gap-10 mt-8">
          <div>

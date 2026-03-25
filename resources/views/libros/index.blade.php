@@ -19,7 +19,7 @@
    </script>
 </head>
 <body class="flex flex-col items-center min-h-screen">
-   <nav class="bg-white w-full border-b border-b-[#004d42] p-4 mb-7 sticky top-0">
+   <nav class="bg-white w-full border-b border-b-[#004d42] p-4 mb-2 sticky top-0">
       <div class="max-w-7xl mx-auto flex justify-between items-center">
          <a href="{{ auth()->check() ? route('libros.index') : route('welcome') }}">
             <img src="{{ asset('storage/logo.png') }}" alt="Logo de CloudBook" class="w-64">
@@ -53,6 +53,10 @@
       </div>
    </nav>
    <main class="w-7xl max-w-7xl mb-10">
+      <x-breadcrumbs :breadcrumbs="[
+      ['label' => 'Inicio', 'url' => route('welcome')],
+      ['label' => 'Libros', 'url' => route('libros.index')],
+      ]"/>
       <section class="grid grid-cols-2 gap-3 mb-3">
          <!-- ISSUE #4 - Barra de Busqueda -->
          <div class="col-span-2 flex justify-end">
@@ -88,7 +92,7 @@
                   @endforeach
                </select>
 
-               <input type="text" name="search" value="{{ $search ?? ''}}" placeholder="Buscar por título o autor" maxlength="255"
+               <input type="text" name="search" value="{{ $search ?? ''}}" placeholder="Buscar por título o autor" maxlength="255" 
                   class="w-70 flex-1 border border-[#004d42] rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#004d42]">
                <button type="submit"
                      class="bg-[#f5a623] px-6 py-2 rounded-md text-sm uppercase cursor-pointer hover:bg-[#e09520] transtion">
