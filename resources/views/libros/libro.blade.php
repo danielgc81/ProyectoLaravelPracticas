@@ -33,6 +33,7 @@
             <div id="account" class="hidden absolute right-0 mt-2 w-56 border bg-white border-[#e8e9ed] rounded-md shadow-lg p-3">
                   @auth
                      <a href="{{route('user.show', Auth::user()->id)}}" class="block py-1 hover:text-[#004d42]">Mis datos</a>
+                     <a href="{{ route('admin.libros.index') }}" class="block py-1 hover:text-[#004d42]">Administar libros</a>
 
                      <hr class="my-2">
 
@@ -89,6 +90,12 @@
                Ver más
             </button>
          </div>
+         @if($libro->user)
+            <p class="text-sm text-gray-400">
+               Añadido por <span class="font-medium">{{ $libro->user->name }}</span>
+               el {{ $libro->created_at->format('d/m/Y') }} a las {{ $libro->created_at->format('H:i') }}
+            </p>
+         @endif
       </div>
    </section>
    <!-- Informacion de las valoraciones -->

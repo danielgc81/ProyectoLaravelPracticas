@@ -61,7 +61,7 @@ class LibroSeeder extends Seeder
                 'image'     => 'https://imagessl2.casadellibro.com/a/l/s7/52/9788478884452.webp',
             ],
             [
-                'title'     => 'LA PENÍNSULA DE LAS CASAS VACÍAS',
+                'title'     => 'La Península de las Casas Vacías',
                 'author'    => 'David Uclés',
                 'editorial' => 'Siruela',
                 'year'      => 2024,
@@ -71,7 +71,7 @@ class LibroSeeder extends Seeder
                 'image'     => 'https://imagessl9.casadellibro.com/a/l/s7/19/9788419942319.webp',
             ],
             [
-                'title'     => 'Los juegos del hambre',
+                'title'     => 'Los Juegos del Hambre',
                 'author'    => 'Suzzane Collins',
                 'editorial' => 'Molino',
                 'year'      => 2008,
@@ -101,7 +101,7 @@ class LibroSeeder extends Seeder
                 'image'     => 'https://imagessl4.casadellibro.com/a/l/s7/54/9788491998754.webp',
             ],
             [
-                'title'     => 'La sombra del viento',
+                'title'     => 'La Sombra del Viento',
                 'author'    => 'Carlos Ruiz Zafón',
                 'editorial' => 'Planeta',
                 'year'      => 2001,

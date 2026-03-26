@@ -33,6 +33,7 @@
             <div id="account" class="hidden absolute right-0 mt-2 w-56 border bg-white border-[#e8e9ed] rounded-md shadow-lg p-3">
                @auth
                      <a href="{{route('user.show', Auth::user()->id)}}" class="block py-1 hover:text-[#004d42]">Mis datos</a>
+                     <a href="{{ route('admin.libros.index')}}" class="block py-1 hover:text-[#004d42]">Administrar libros</a>
 
                      <hr class="my-2">
 
@@ -92,7 +93,7 @@
                   @endforeach
                </select>
 
-               <input type="text" name="search" value="{{ $search ?? ''}}" placeholder="Buscar por título o autor" maxlength="255" 
+               <input type="text" name="search" value="{{ $search ?? ''}}" placeholder="Buscar por título o autor" maxlength="255"
                   class="w-70 flex-1 border border-[#004d42] rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#004d42]">
                <button type="submit"
                      class="bg-[#f5a623] px-6 py-2 rounded-md text-sm uppercase cursor-pointer hover:bg-[#e09520] transtion">
@@ -128,7 +129,7 @@
             <article class="max-w-70 border border-[#e8e9ed] overflow-hidden flex flex-col">
                <div class="h-96">
                   <img src="{{ $libro->image }}" alt="Portada {{ $libro->title }}"
-                     class="w-full h-96 p-6 rounded-xl object-cover">
+                     class="w-full h-96 p-6 rounded-xl object-fill">
                </div>
                <div class="px-5 pb-7 flex flex-col gap-1 flex-1">
                   <h3 class="text-lg uppercase truncate font-semibold text-[#023020]">
