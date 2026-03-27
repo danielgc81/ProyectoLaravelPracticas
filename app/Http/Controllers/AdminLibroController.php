@@ -6,6 +6,7 @@ use App\Models\Libro;
 use App\Http\Requests\Libro\StoreLibroRequest;
 use App\Http\Requests\Libro\UpdateLibroRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class AdminLibroController extends Controller
 {
@@ -68,7 +69,16 @@ class AdminLibroController extends Controller
      */
     public function update(UpdateLibroRequest $request, Libro $libro)
     {
-      $libro->update($request->validated());
+      $data = $request->validated();
+
+      if ($request->hasFile('image')) {
+         Storage::disk('public')->delete($libro->image);
+         $data['image'] = 'storage/' . $request->file('image')->store('portadas', 'public');
+      } else {
+         unset($data['image']);
+      }
+
+      $libro->update($data);
       return redirect()->route('admin.libros.index')->with('success', 'Libro actualizado correctamente.');
     }
 
