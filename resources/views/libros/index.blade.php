@@ -70,7 +70,8 @@
                   <option value="created_at" {{ ($orderBy ?? 'created_at') === 'created_at' ? 'selected' : '' }}>Más Reciente</option>
                   <option value="title" {{ ($orderBy ?? '') === 'title' ? 'selected' : '' }}>Título A-Z</option>
                   <option value="author" {{ ($orderBy ?? '') === 'author' ? 'selected' : '' }}>Autor</option>
-                  <option value="valoraciones" {{ ($orderBy ?? '') === 'valoraciones'? 'selected' : '' }}>Nº Opiniones</option>
+                  <option value="valoraciones" {{ ($orderBy ?? '') === 'valoraciones' ? 'selected' : '' }}>Nº Opiniones</option>
+                  <option value="media" {{ ($orderBy ?? '') === 'media' ? 'selected' : '' }}>Puntuación media</option>
                </select>
                <!-- Select dirección -->
                <select name="direction"
@@ -131,13 +132,26 @@
                   <img src="{{ $libro->image }}" alt="Portada {{ $libro->title }}"
                      class="w-full h-96 p-6 rounded-xl object-fill">
                </div>
-               <div class="px-5 pb-7 flex flex-col gap-1 flex-1">
+               <div class="px-5 pb-4 flex flex-col gap-1 flex-1">
                   <h3 class="text-lg uppercase truncate font-semibold text-[#023020]">
                      {{ $libro->title }}
                   </h3>
                   <p class="truncate text-[#004d42]">{{ $libro->author }}</p>
                </div>
-               <a href="{{ route('libros.show', $libro->id) }}" class="bg-[#ebab21] py-2.5 px-5 uppercase rounded-md self-end mb-5 mr-5 hover:bg-[#e09520] transtion">Ver Libro</a>
+               <div class="flex items-center text-sm text-gray-500 mt-1 mb-5 px-5 justify-between">
+                  <div class="flex flex-col">
+                     <span class="flex items-center gap-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-[#ebab21]" viewBox="0 0 24 24" fill="currentColor">
+                           <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                        </svg>
+                        {{ number_format($libro->valoraciones_avg_estrellas, 1) }}/5
+                     </span>
+                     <span class="flex items-center gap-1">
+                        {{ $libro->valoraciones_count }} {{ $libro->valoraciones_count !== 1 ? 'opiniones' : 'opinión'}}
+                     </span>
+                  </div>
+                  <a href="{{ route('libros.show', $libro->id) }}" class="bg-[#ebab21] py-1.5 text-black px-4 uppercase rounded-2xl hover:bg-[#e09520] transtion">Ver Libro</a>
+               </div>
             </article>
             @empty
                @if(!empty($search))

@@ -6,7 +6,7 @@ use App\Models\Libro;
 class LibroService {
 
    public function getAll (?string $search = null, string $orderBy = 'created_at', string $direction = 'desc', ?string $genre = null) {
-      $query = $orderBy === 'valoraciones' ? Libro::withCount('valoraciones') : Libro::query();
+      $query = Libro::withCount('valoraciones')->withAvg('valoraciones', 'estrellas');
 
       if ($search) {
          $query->where(function ($q) use ($search) {
@@ -19,9 +19,13 @@ class LibroService {
          $query->where('genre', $genre);
       }
 
-      $query->orderBy(
-         $orderBy === 'valoraciones' ? 'valoraciones_count' : $orderBy, $direction
-      );
+      $column = match($orderBy) {
+         'valoraciones' => 'valoraciones_count',
+         'media'        => 'valoraciones_avg_estrellas',
+         default        => $orderBy,
+      };
+
+      $query->orderBy($column, $direction);
 
       return $query->get();
    }
