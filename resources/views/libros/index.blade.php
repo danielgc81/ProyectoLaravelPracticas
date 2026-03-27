@@ -97,12 +97,12 @@
                <input type="text" name="search" value="{{ $search ?? ''}}" placeholder="Buscar por título o autor" maxlength="255"
                   class="w-70 flex-1 border border-[#004d42] rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#004d42]">
                <button type="submit"
-                     class="bg-[#f5a623] px-6 py-2 rounded-md text-sm uppercase cursor-pointer hover:bg-[#e09520] transtion">
+                     class="bg-[#f5a623] px-6 py-2 rounded-3xl text-sm uppercase cursor-pointer hover:bg-[#e09520] transtion">
                      Buscar
                </button>
                <!-- Tras la busqueda aparecera un boton de limpiar para eliminarla -->
                @if(!empty($search))
-                  <a href="{{ route('libros.index') }}" class="bg-gray-200 text-gray-600 px-4 py-2 rounded-md text-sm uppercase hover:bg-gray-300 transition">
+                  <a href="{{ route('libros.index') }}" class="bg-gray-200 text-gray-600 px-4 py-2 rounded-3xl text-sm uppercase hover:bg-gray-300 transition">
                      Limpiar
                   </a>
                @endif

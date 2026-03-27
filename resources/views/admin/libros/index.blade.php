@@ -60,7 +60,7 @@
       ]"/>
       <div class="flex justify-between items-center mb-6 mt-5">
          <h1 class="text-2xl font-bold text-[#004d42] self-end">Administrar libros</h1>
-         <a href="{{ route('admin.libros.create') }}" class="bg-[#f5a623] px-4 py-2 rounded-md hover:bg-[#e09520] transition uppercase">
+         <a href="{{ route('admin.libros.create') }}" class="bg-[#f5a623] px-4 py-2 rounded-3xl hover:bg-[#e09520] transition uppercase">
             + Añadir libro
          </a>
       </div>
