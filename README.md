@@ -95,7 +95,7 @@ php artisan migrate
 php artisan db:seed --class=LibroSeeder
 ```
 
-> Los usuarios no tienen un seeder sino que se crean en la ruta `/register`. Las valoraciones tampoco tienen seeder, primero inicia sesión con un usuario registrado, entra en un libro y haz click sobre el boton "Dejar mi Opinión" y rellena el formulario de valoración que aparece.
+> Los usuarios no tienen un seeder sino que se crean en la ruta `/register`. Las valoraciones tampoco tienen seeder, primero inicia sesión con un usuario registrado, entra en un libro y haz click sobre el boton "Dejar mi Opinión" y rellena el formulario de valoración que aparece. Cuando quieras crear un libro o editarlo, yo saco la informacion de la web de La Casa del Libro.
 
 ---
 
@@ -123,9 +123,14 @@ Abre Laravel Herd y vete a Sites->Add Site->Link existing project y seleccionas 
 
 | Ruta | Acceso | Descripción |
 |------|--------|-------------|
+| `/welcome` | Invitado | Página de bienvenida donde puedes viajar a `/login` o `/register` o hacia `/libros` |
 | `/login` | Invitado | Formulario de inicio de sesión |
 | `/register` | Invitado | Formulario de registro de usuario |
-| `/libros` | Autenticado | Lista todos los libros |
-| `/libros/{id}` | Autenticado | Detalle de un libro concreto: Se accede a través del boton "Ver Libro" |
+| `/libros` | Autenticado o Invitado | Lista todos los libros |
+| `/libros/{id}` | Autenticado o Invitado | Detalle de un libro concreto: Se accede a través del boton "Ver Libro" |
 | `/valoraciones/create?libro_id={id}` | Autenticado | Formulario para valorar un libro: Se accede a traves del boton "Dejar Mi Opinion" en `libros/{id}` |
+| `/user/{id}` | Autenticado | Página donde el usuario puede ver sus datos y cambiar tanto su nombre, email y contraseña |
+| `/admin/libros` | Autenticado | Página donde el usuario puede administrar los libros y acceder a los formularios para editar o añadir libros |
+| `/admin/libros/{id}/edit` | Autenticado | Página donde el usuario puede editar un libro con los datos de este precargados |
+| `/admin/libros/create` | Autenticado | Página donde el usuario puede crear un nuevo libro |
 
