@@ -60,7 +60,7 @@
       ]"/>
       <div class="flex justify-between items-center mb-6 mt-5">
          <h1 class="text-2xl font-bold text-[#004d42] self-end">Administrar libros</h1>
-         <a href="{{ route('admin.libros.create') }}" class="bg-[#f5a623] px-4 py-2 rounded-md hover:bg-[#e09520] transition uppercase">
+         <a href="{{ route('admin.libros.create') }}" class="bg-[#f5a623] px-4 py-2 rounded-3xl hover:bg-[#e09520] transition uppercase">
             + Añadir libro
          </a>
       </div>
@@ -85,7 +85,7 @@
                   <td class="px-4 py-3 text-gray-600">{{ $libro->author }}</td>
                   <td class="px-4 py-3 text-gray-600">{{ $libro->genre }}</td>
                   <td class="px-4 py-3 text-gray-600">{{ $libro->user?->name ?? '—' }}</td>
-                  <td class="px-4 py-3 text-gray-400">{{ $libro->created_at->format('d/m/Y H:i') }}</td>
+                  <td class="px-4 py-3 text-gray-400">{{ $libro->created_at ? $libro->created_at->format('d/m/Y H:i') : '—' }}</td>
                   <td class="px-4 py-3">
                      <a href="{{ route('admin.libros.edit', $libro) }}" class="text-[#004d42] hover:underline">Editar</a>
                   </td>

@@ -6,6 +6,7 @@ use App\Models\Libro;
 use App\Http\Requests\Libro\StoreLibroRequest;
 use App\Http\Requests\Libro\UpdateLibroRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class AdminLibroController extends Controller
 {
@@ -32,10 +33,16 @@ class AdminLibroController extends Controller
      */
     public function store(StoreLibroRequest $request)
     {
-      Libro::create([
-            ...$request->validated(),
-            'user_id' => Auth::user()->id,
-      ]);
+      $data = $request->validated();
+
+      if ($request->hasFile('image')) {
+         $path = $request->file('image')->store('portadas', 'public');
+         $data['image'] = 'storage/' . $path;
+      }
+
+      $data['user_id'] = Auth::user()->id;
+
+      Libro::create($data);
 
       return redirect()->route('admin.libros.index')->with('success', 'Libro creado correctamente.');
     }
@@ -62,7 +69,16 @@ class AdminLibroController extends Controller
      */
     public function update(UpdateLibroRequest $request, Libro $libro)
     {
-      $libro->update($request->validated());
+      $data = $request->validated();
+
+      if ($request->hasFile('image')) {
+         Storage::disk('public')->delete($libro->image);
+         $data['image'] = 'storage/' . $request->file('image')->store('portadas', 'public');
+      } else {
+         unset($data['image']);
+      }
+
+      $libro->update($data);
       return redirect()->route('admin.libros.index')->with('success', 'Libro actualizado correctamente.');
     }
 

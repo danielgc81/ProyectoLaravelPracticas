@@ -55,21 +55,28 @@
    </nav>
    <div class="max-w-7xl mx-auto">
       <x-breadcrumbs :breadcrumbs="[
-      ['label' => 'Inicio', 'url' => route('welcome')],
-      ['label' => 'Administrar libros', 'url' => route('admin.libros.index')],
-      ['label' => 'Nuevo libro', 'url' => route('admin.libros.create')],
+         ['label' => 'Inicio', 'url' => route('welcome')],
+         ['label' => 'Administrar libros', 'url' => route('admin.libros.index')],
+         ['label' => 'Nuevo libro', 'url' => route('admin.libros.create')],
       ]"/>
    </div>
 
-   <section class="max-w-2xl mx-auto mt-5 mb-20">
-      <h1 class="text-2xl font-bold text-[#004d42] mb-6">Añadir libro</h1>
+   <section class="max-w-4xl mx-auto mt-5 mb-20">
 
-      <form method="POST" action="{{ route('admin.libros.store') }}" onsubmit="resolveGenre()">
+      <form method="POST" action="{{ route('admin.libros.store') }}" enctype="multipart/form-data" onsubmit="resolveGenre()">
          @csrf
+         <div class="flex justify-between items-center mb-5">
+            <h1 class="text-2xl font-bold text-[#004d42]">Añadir libro</h1>
+            <div class="flex gap-4">
+               <button type="button" class="bg-gray-200 text-gray-600 px-4 py-1.5 rounded-2xl text-sm cursor-pointer hover:bg-gray-300 transition uppercase">
+                  <a href="{{ route('admin.libros.index') }}">Cancelar</a>
+               </button>
+               <button type="submit" class="bg-[#f5a623] px-4 py-1.5 rounded-2xl text-sm cursor-pointer hover:bg-[#e09520] transition uppercase">
+                  Guardar
+               </button>
+            </div>
+         </div>
          @include('admin.libros.form-crud')
-         <button type="submit" class="mt-6 bg-[#004d42] text-white px-6 py-2.5 rounded-md cursor-pointer hover:bg-[#003830] transition uppercase">
-            Guardar libro
-         </button>
       </form>
    </section>
 </body>

@@ -29,7 +29,7 @@ class StoreLibroRequest extends FormRequest
             'ISBN' => 'required|string|max:20',
             'genre' => 'required|string|max:100',
             'synopsis' => 'required|string',
-            'image' => 'required|url',
+            'image' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
         ];
     }
 }

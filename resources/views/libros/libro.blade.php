@@ -64,7 +64,7 @@
    <section class="max-w-4xl flex mx-auto gap-4 mt-6 justify-center">
       <div class="flex flex-col items-center">
          <div class="w-3xs">
-            <img src="{{ $libro->image }}" alt="Portada {{ $libro->title }}">
+            <img src="{{ asset($libro->image) }}" alt="Portada {{ $libro->title }}">
          </div>
          <div class="mt-4 flex flex-col">
             @auth
