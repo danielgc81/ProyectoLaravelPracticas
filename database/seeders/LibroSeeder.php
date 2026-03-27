@@ -11,7 +11,7 @@ class LibroSeeder extends Seeder
     {
         $books = [
             [
-                'title'     => 'Cien años de soledad',
+                'title'     => 'Cien Años de Soledad',
                 'author'    => 'Gabriel García Márquez',
                 'editorial' => 'Random House',
                 'year'      => 1967,
@@ -21,7 +21,7 @@ class LibroSeeder extends Seeder
                 'image'     => 'https://imagessl8.casadellibro.com/a/l/s7/58/9788439745358.webp',
             ],
             [
-                'title'     => 'El nombre de la rosa',
+                'title'     => 'El Nombre de la Rosa',
                 'author'    => 'Umberto Eco',
                 'editorial' => 'Lumen',
                 'year'      => 1980,

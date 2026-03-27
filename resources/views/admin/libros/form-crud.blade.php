@@ -64,6 +64,7 @@
    </div>
 </div>
 <script>
+   // Este funcion se ejecuta cuando se manda el formulario y comprueba cual de los dos (select o el input) debe enviar
    function resolveGenre() {
       const select = document.getElementById('genre-select');
       const input  = document.getElementById('genre-new');
@@ -72,6 +73,7 @@
       }
    }
 
+   // Esta funciona permite mostrar el input cuando seleccionamos un Otro en en el select y que desaparezca cuando seleccionamos un genero que existe en nuestra bbdd
    function toggleNewGenre(select) {
       const input = document.getElementById('genre-new');
       if (select.value === 'nuevo') {
