@@ -85,7 +85,7 @@
                   <td class="px-4 py-3 text-gray-600">{{ $libro->author }}</td>
                   <td class="px-4 py-3 text-gray-600">{{ $libro->genre }}</td>
                   <td class="px-4 py-3 text-gray-600">{{ $libro->user?->name ?? '—' }}</td>
-                  <td class="px-4 py-3 text-gray-400">{{ $libro->created_at->format('d/m/Y H:i') }}</td>
+                  <td class="px-4 py-3 text-gray-400">{{ $libro->created_at ? $libro->created_at->format('d/m/Y H:i') : '—' }}</td>
                   <td class="px-4 py-3">
                      <a href="{{ route('admin.libros.edit', $libro) }}" class="text-[#004d42] hover:underline">Editar</a>
                   </td>
