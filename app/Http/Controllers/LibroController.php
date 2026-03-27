@@ -14,11 +14,21 @@ class LibroController extends Controller
    /**
     * Display a listing of the resource.
     */
-   public function index()
+   public function index(Request $request)
    {
-      $libros = $this->service->getAll();
+      $search = $request->input('search');
+      $orderBy = $request->input('order_by', 'created_at');
+      $direction = $request->input('direction', 'desc');
+      $genre = $request->input('genre');
 
-      return view('libros.index', compact('libros'));
+      if ($direction === 'default') {
+         $direction = 'desc';
+      }
+
+      $libros = $this->service->getAll($search, $orderBy, $direction, $genre);
+      $genres = $this->service->getGenres();
+
+      return view('libros.index', compact('libros', 'search', 'orderBy', 'direction', 'genre', 'genres'));
    }
 
    /**

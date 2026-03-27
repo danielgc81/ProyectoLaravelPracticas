@@ -13,7 +13,7 @@
          <h1 class="text-3xl font-bold self-center m-3">Registrarse</h1>
          <div class="flex flex-col mb-4">
             <label for="user" class="mb-1.5">Nombre de Usuario</label>
-            <input id="user" type="text" name="name" required class="bg-white py-1.5 px-3 rounded-xl focus:outline-none text-gray-600">
+            <input id="user" type="text" name="name" maxlength="25" required class="bg-white py-1.5 px-3 rounded-xl focus:outline-none text-gray-600">
             @error('name')
                <span class="text-red-500 text-xs mt-1">{{ $message }}</span>
             @enderror

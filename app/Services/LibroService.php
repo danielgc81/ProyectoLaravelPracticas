@@ -5,10 +5,29 @@ use App\Models\Libro;
 
 class LibroService {
 
-   public function getAll () {
-      $query = Libro::latest()->get();
+   public function getAll (?string $search = null, string $orderBy = 'created_at', string $direction = 'desc', ?string $genre = null) {
+      $query = $orderBy === 'valoraciones' ? Libro::withCount('valoraciones') : Libro::query();
 
-      return $query;
+      if ($search) {
+         $query->where(function ($q) use ($search) {
+            $q->where('title', 'like', "%{$search}%")
+               ->orWhere('author', 'like', "%{$search}%");
+         });
+      }
+
+      if ($genre) {
+         $query->where('genre', $genre);
+      }
+
+      $query->orderBy(
+         $orderBy === 'valoraciones' ? 'valoraciones_count' : $orderBy, $direction
+      );
+
+      return $query->get();
+   }
+
+   public function getGenres(): array {
+      return Libro::distinct()->orderBy('genre')->pluck('genre')->toArray();
    }
 
    public function find (int $id): Libro {

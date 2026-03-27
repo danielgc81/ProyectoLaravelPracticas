@@ -3,8 +3,25 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\LibroController;
+use App\Http\Controllers\AdminLibroController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ValoracionController;
+
+use App\Models\Libro;
+use App\Models\User;
+use App\Models\Valoracion;
+
+// Ruta de bienvenida
+Route::get('/', function() { return view('welcome', [
+   'totalLibros' => Libro::count(), // Datos Públicos
+   'totalValoraciones' => Valoracion::count(),
+   'totalUsers' => User::count(),
+]); })->name('welcome');
+
+// Rutas públicas de libro
+Route::get('/libros', [LibroController::class, 'index'])->name('libros.index');
+Route::get('/libros/{libro}', [LibroController::class, 'show'])->name('libros.show');
 
 // Rutas solo invitados (usuarios no autenticados)
 Route::middleware('guest')->group(function () {
@@ -18,9 +35,10 @@ Route::middleware('guest')->group(function () {
 
 // Rutas solo autenticados
 Route::middleware('auth')->group(function () {
-   Route::resource('libros', LibroController::class);
+   Route::resource('admin/libros', AdminLibroController::class)->names('admin.libros');
+   Route::resource('libros', LibroController::class)->except('index', 'show');
    Route::resource('valoraciones', ValoracionController::class);
-
+   Route::resource('user', UserController::class);
    // Ruta encargada de cierre de sesión
    Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 });

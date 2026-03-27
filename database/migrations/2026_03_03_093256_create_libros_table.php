@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('genre');
             $table->string('ISBN');
             $table->string('image')->nullable();
+            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
             $table->timestamps();
         });
     }

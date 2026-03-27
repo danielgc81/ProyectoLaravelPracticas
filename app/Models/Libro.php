@@ -13,10 +13,16 @@ class Libro extends Model
       'year',
       'genre',
       'ISBN',
+      'synopsis',
       'image',
+      'user_id',
    ];
 
    public function valoraciones() {
       return $this->hasMany(Valoracion::class);
+   }
+
+   public function user() {
+      return $this->belongsTo(User::class);
    }
 }
