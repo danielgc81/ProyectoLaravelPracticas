@@ -29,7 +29,7 @@ class UpdateLibroRequest extends FormRequest
             'ISBN' => 'required|string|max:20',
             'genre'  => 'required|string|max:100',
             'synopsis' => 'required|string',
-            'image' => 'nullable|url',
+            'image' => 'nullable|¡image|mimes:jpg,jpeg,png,webp|max:2048',
         ];
     }
 }

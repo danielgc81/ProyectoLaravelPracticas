@@ -55,14 +55,16 @@
          @error('synopsis') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
       </div>
    </div>
-   <div class="w-[30%]>
+   <div class="w-[30%]">
       <label class="block text-sm font-medium text-gray-700 mb-1">
-         URL de la imagen @isset($libro) <span class="text-gray-400 text-xs">(dejar vacío para mantener la actual)</span> @else <span class="text-red-500">*</span> @endisset
+         Subir Portada
       </label>
       @isset($libro)
-         <img src="{{ $libro->image }}" class="w-20 mb-2 rounded shadow">
+         @if($libro->image)
+            <img src="{{ asset($libro->image) }}" class="w-20 mb-2 rounded shadow object-contain">
+         @endif
       @endisset
-      <input type="url" name="image" value="{{ old('image', $libro->image ?? '') }}"
+      <input type="file" name="image" accept="image/*"
          class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#004d42]">
       @error('image') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
    </div>

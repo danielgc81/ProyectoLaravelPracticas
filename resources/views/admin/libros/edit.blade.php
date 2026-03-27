@@ -63,7 +63,7 @@
    </div>
 
 <section class="max-w-4xl mx-auto mt-5 mb-20">
-   <form method="POST" action="{{ route('admin.libros.update', $libro) }}" onsubmit="resolveGenre()">
+   <form method="POST" action="{{ route('admin.libros.update', $libro) }}" enctype="multipart/form-data" onsubmit="resolveGenre()">
       @csrf
       @method('PUT')
       <div class="flex justify-between items-center mb-5">

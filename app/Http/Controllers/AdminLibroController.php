@@ -32,10 +32,16 @@ class AdminLibroController extends Controller
      */
     public function store(StoreLibroRequest $request)
     {
-      Libro::create([
-            ...$request->validated(),
-            'user_id' => Auth::user()->id,
-      ]);
+      $data = $request->validated();
+
+      if ($request->hasFile('image')) {
+         $path = $request->file('image')->store('portadas', 'public');
+         $data['image'] = 'storage/' . $path;
+      }
+
+      $data['user_id'] = Auth::user()->id;
+
+      Libro::create($data);
 
       return redirect()->route('admin.libros.index')->with('success', 'Libro creado correctamente.');
     }
