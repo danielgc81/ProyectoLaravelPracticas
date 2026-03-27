@@ -90,7 +90,7 @@
                Ver más
             </button>
          </div>
-         @if($libro->user)
+         @if($libro->user && $libro->created_at)
             <p class="text-sm text-gray-400">
                Añadido por <span class="font-medium">{{ $libro->user->name }}</span>
                el {{ $libro->created_at->format('d/m/Y') }} a las {{ $libro->created_at->format('H:i') }}
