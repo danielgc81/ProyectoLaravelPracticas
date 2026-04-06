@@ -62,7 +62,6 @@
    </div>
 
    <section class="max-w-4xl mx-auto mt-5 mb-20">
-
       <form method="POST" action="{{ route('admin.libros.store') }}" enctype="multipart/form-data" onsubmit="resolveGenre()">
          @csrf
          <div class="flex justify-between items-center mb-5">

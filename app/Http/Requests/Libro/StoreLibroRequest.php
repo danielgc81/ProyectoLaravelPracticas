@@ -27,7 +27,7 @@ class StoreLibroRequest extends FormRequest
             'editorial' => 'required|string|max:255',
             'year' => 'required|integer|max:' . date('Y'),
             'ISBN' => 'required|string|max:20',
-            'genre' => 'required|string|max:100',
+            'genre_id' => 'required|integer',
             'synopsis' => 'required|string',
             'image' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
         ];

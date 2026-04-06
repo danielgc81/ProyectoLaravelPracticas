@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Genre;
 use Illuminate\Http\Request;
 
 use App\Models\Libro;
@@ -26,7 +27,7 @@ class LibroController extends Controller
       }
 
       $libros = $this->service->getAll($search, $orderBy, $direction, $genre);
-      $genres = $this->service->getGenres();
+      $genres = Genre::orderBy('name')->get();
 
       return view('libros.index', compact('libros', 'search', 'orderBy', 'direction', 'genre', 'genres'));
    }

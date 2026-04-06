@@ -11,7 +11,7 @@ class Libro extends Model
       'author',
       'editorial',
       'year',
-      'genre',
+      'genre_id',
       'ISBN',
       'synopsis',
       'image',
@@ -24,5 +24,9 @@ class Libro extends Model
 
    public function user() {
       return $this->belongsTo(User::class);
+   }
+
+   public function genre() {
+      return $this->belongsTo(Genre::class);
    }
 }

@@ -78,7 +78,6 @@
          </div>
       </div>
       @include('admin.libros.form-crud')
-
    </form>
 </section>
 </body>

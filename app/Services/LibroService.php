@@ -16,7 +16,7 @@ class LibroService {
       }
 
       if ($genre) {
-         $query->where('genre', $genre);
+         $query->where('genre_id', $genre);
       }
 
       $column = match($orderBy) {
@@ -28,10 +28,6 @@ class LibroService {
       $query->orderBy($column, $direction);
 
       return $query->get();
-   }
-
-   public function getGenres(): array {
-      return Libro::distinct()->orderBy('genre')->pluck('genre')->toArray();
    }
 
    public function find (int $id): Libro {

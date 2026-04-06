@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Libro;
 use App\Http\Requests\Libro\StoreLibroRequest;
 use App\Http\Requests\Libro\UpdateLibroRequest;
+use App\Models\Genre;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -24,7 +25,7 @@ class AdminLibroController extends Controller
      */
     public function create()
     {
-      $genres = Libro::distinct()->orderBy('genre')->pluck('genre');
+      $genres = Genre::orderBy('name')->get();
       return view('admin.libros.create', compact('genres'));
     }
 
@@ -60,7 +61,7 @@ class AdminLibroController extends Controller
      */
     public function edit(Libro $libro)
     {
-      $genres = Libro::distinct()->orderBy('genre')->pluck('genre');
+      $genres = Genre::orderBy('name')->get();
       return view('admin.libros.edit', compact('libro', 'genres'));
     }
 

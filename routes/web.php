@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\LibroController;
 use App\Http\Controllers\AdminLibroController;
+use App\Http\Controllers\AdminGenreController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ValoracionController;
@@ -36,6 +37,7 @@ Route::middleware('guest')->group(function () {
 // Rutas solo autenticados
 Route::middleware('auth')->group(function () {
    Route::resource('admin/libros', AdminLibroController::class)->names('admin.libros');
+   Route::resource('admin/genres', AdminGenreController::class)->names('admin.genres');
    Route::resource('libros', LibroController::class)->except('index', 'show');
    Route::resource('valoraciones', ValoracionController::class);
    Route::resource('user', UserController::class);

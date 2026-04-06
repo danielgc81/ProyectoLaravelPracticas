@@ -88,8 +88,8 @@
                      class="border border-[#004d42] rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#004d42] cursor-pointer">
                   <option value="">Todos los géneros</option>
                   @foreach ($genres as $g)
-                     <option value="{{ $g }}" {{ ($genre ?? '') === $g ? 'selected' : '' }}>
-                        {{ $g }}
+                     <option value="{{ $g->id }}" {{ ($genre ?? '') == $g->id ? 'selected' : '' }}>
+                        {{ $g->name }}
                      </option>
                   @endforeach
                </select>

@@ -34,19 +34,16 @@
       </div>
       <div>
          <label class="block text-sm font-medium text-gray-700 mb-1">Género <span class="text-red-500">*</span></label>
-         <select name="genre" id="genre-select"
+         <select name="genre_id"
             class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#004d42]">
             <option value="">Selecciona un género</option>
             @foreach($genres as $genre)
-                  <option value="{{ $genre }}" {{ old('genre', $libro->genre ?? '') === $genre ? 'selected' : '' }}>
-                     {{ $genre }}
+                  <option value="{{ $genre->id }}" {{ old('genre_id', $libro->genre_id ?? '') == $genre->id ? 'selected' : '' }}>
+                     {{ $genre->name }}
                   </option>
             @endforeach
-            <option value="nuevo">Otro (nuevo género)</option>
          </select>
-         <input type="text" id="genre-new" placeholder="Nuevo género"
-            class="hidden mt-2 w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#004d42]">
-         @error('genre') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+         @error('genre_id') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
       </div>
       <div>
          <label class="block text-sm font-medium text-gray-700 mb-1">Sinopsis <span class="text-red-500">*</span></label>
@@ -69,32 +66,4 @@
       @error('image') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
    </div>
 </div>
-<script>
-   // Este funcion se ejecuta cuando se manda el formulario y comprueba cual de los dos (select o el input) debe enviar
-   function resolveGenre() {
-      const select = document.getElementById('genre-select');
-      const input  = document.getElementById('genre-new');
-      if (select.value === 'nuevo' && input.value.trim()) {
-         select.value = input.value.trim();
-      }
-   }
 
-   // Esta funciona permite mostrar el input cuando seleccionamos un Otro en en el select y que desaparezca cuando seleccionamos un genero que existe en nuestra bbdd
-   function toggleNewGenre(select) {
-      const input = document.getElementById('genre-new');
-      if (select.value === 'nuevo') {
-         input.name = 'genre';
-         select.name = '';
-         input.classList.remove('hidden');
-         input.focus();
-      } else {
-         input.name = '';
-         select.name = 'genre';
-         input.classList.add('hidden');
-      }
-   }
-
-   document.getElementById('genre-select').addEventListener('change', function() {
-      toggleNewGenre(this);
-   });
-</script>

@@ -68,12 +68,12 @@
          </div>
          <div class="mt-4 flex flex-col">
             @auth
-               <a href="{{route('valoraciones.create', ['libro_id' => $libro->id])}}" class="bg-[#ebab21] py-2.5 px-5 uppercase rounded-md hover:bg-[#e09520] transtion">Dejar mi opinión</a>
+               <a href="{{route('valoraciones.create', ['libro_id' => $libro->id])}}" class="bg-[#ebab21] py-2 px-4 text-sm uppercase rounded-3xl hover:bg-[#e09520] transtion">Dejar mi opinión</a>
             @endauth
             @guest
-               <a href="{{route('valoraciones.create', ['libro_id' => $libro->id])}}" class="bg-[#ebab21] py-2.5 px-5 uppercase rounded-md pointer-events-none opacity-50">Dejar mi opinión</a>
+               <a href="{{route('valoraciones.create', ['libro_id' => $libro->id])}}" class="bg-[#ebab21] py-2 px-4 text-sm uppercase rounded-3xl pointer-events-none opacity-50">Dejar mi opinión</a>
             @endguest
-            <a href="{{ route('libros.index') }}" class="bg-[#004d42] py-2.5 px-5 uppercase text-white rounded-md hover:bg-[#003830] transition text-center mt-3">Volver</a>
+            <a href="{{ route('libros.index') }}" class="bg-[#004d42] py-2 px-4 text-sm uppercase text-white rounded-3xl hover:bg-[#003830] transition text-center mt-3">Volver</a>
          </div>
       </div>
       <div class="w-[60%] flex flex-col gap-2">
@@ -82,7 +82,7 @@
             <p class="text-[#737373]">{{$libro->author}}</p>
             <p class="text-[#737373]">{{$libro->editorial}} - {{$libro->ISBN}}</p>
          </div>
-         <span class="bg-[#004d42] w-fit text-white border rounded-md py-1.5 px-2 text-xs">{{$libro->genre}}</span>
+         <span class="bg-[#004d42] w-fit text-white border rounded-md py-1.5 px-2 text-xs">{{$libro->genre->name}}</span>
          <div class="mt-2">
             <h3 class="font-semibold">Sinopsis de <span class="uppercase">{{$libro->title}}</span></h3>
             <p class="text-lg mt-1.5 line-clamp-15" id="synopsis-text">{{$libro->synopsis}}</p>
@@ -99,7 +99,7 @@
       </div>
    </section>
    <!-- Informacion de las valoraciones -->
-   <section class="max-w-4xl flex flex-col mt-10 mx-auto mb-10">
+   <section class="max-w-4xl flex flex-col mt-11 mx-auto mb-10">
       <!-- Media valoraciones -->
       <div class="flex items-center gap-4 mb-5">
          <div class="flex mx-auto text-4xl">

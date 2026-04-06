@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('editorial');
             $table->integer('year');
             $table->text('synopsis');
-            $table->string('genre');
+            $table->string('genre_id');
             $table->string('ISBN');
             $table->string('image')->nullable();
             $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
