@@ -10,7 +10,7 @@ Antes de empezar, asegúrate de tener instalado lo siguiente:
 
 | Herramienta | Versión mínima | 
 |-------------|---------------|
-| PHP | >= 8.1 |
+| PHP | >= 8.2 |
 | Composer | última |
 | Node.js + npm | >= 18 |
 | Git | última |
