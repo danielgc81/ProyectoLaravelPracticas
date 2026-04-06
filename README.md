@@ -89,10 +89,11 @@ DB_PASSWORD=database_password
 php artisan migrate
 ```
 
-**5.3** Ejecuta los datos de pruebas para los libros
+**5.3** Ejecuta los datos de pruebas para los libros y géneros
 
 ```bash
 php artisan db:seed --class=LibroSeeder
+php artisan db:seed --class=GenreSeeder
 ```
 
 > Los usuarios no tienen un seeder sino que se crean en la ruta `/register`. Las valoraciones tampoco tienen seeder, primero inicia sesión con un usuario registrado, entra en un libro y haz click sobre el boton "Dejar mi Opinión" y rellena el formulario de valoración que aparece. Cuando quieras crear un libro o editarlo, yo saco la informacion de la web de La Casa del Libro.
