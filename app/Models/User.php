@@ -49,4 +49,12 @@ class User extends Authenticatable
    public function favoritos() {
       return $this->belongsToMany(Libro::class, 'favoritos');
    }
+
+   public function esAdministrador() {
+      return $this->tipo === 'admin';
+   }
+
+   public function esLector() {
+      return $this->tipo === 'lector';
+   }
 }

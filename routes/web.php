@@ -41,8 +41,6 @@ Route::middleware('guest')->group(function () {
 
 // Rutas solo autenticados
 Route::middleware('auth')->group(function () {
-   Route::resource('admin/libros', AdminLibroController::class)->names('admin.libros');
-   Route::resource('admin/genres', AdminGenreController::class)->names('admin.genres');
    Route::resource('libros', LibroController::class)->except('index', 'show');
    Route::post('/favoritos/{libro}', [FavoritoController::class, 'toggle'])->name('favoritos.toggle');
    Route::get('/favoritos', [FavoritoController::class, 'index'])->name('favoritos.index');
@@ -50,4 +48,10 @@ Route::middleware('auth')->group(function () {
    Route::resource('user', UserController::class);
    // Ruta encargada de cierre de sesión
    Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+});
+
+// Ruta solo User tipo Admin
+Route::middleware(['auth', 'admin'])->group(function () {
+      Route::resource('admin/libros', AdminLibroController::class)->names('admin.libros');
+      Route::resource('admin/genres', AdminGenreController::class)->names('admin.genres');
 });

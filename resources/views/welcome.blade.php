@@ -8,7 +8,7 @@
 </head>
 <body>
    <x-navbar/>
-   <div class="h-dvh flex flex-col justify-between items-center">
+   <div class="h-[80vh] flex flex-col justify-between items-center">
       <div class="flex flex-col items-center">
          <img src="{{asset('storage/logo-grande1.png')}}" alt=""
          class="max-w-3xl">
