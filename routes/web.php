@@ -4,11 +4,12 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\LibroController;
 use App\Http\Controllers\GenreController;
+use App\Http\Controllers\FavoritoController;
+use App\Http\Controllers\ValoracionController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AdminLibroController;
 use App\Http\Controllers\AdminGenreController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\ValoracionController;
 
 use App\Models\Genre;
 use App\Models\Libro;
@@ -43,6 +44,8 @@ Route::middleware('auth')->group(function () {
    Route::resource('admin/libros', AdminLibroController::class)->names('admin.libros');
    Route::resource('admin/genres', AdminGenreController::class)->names('admin.genres');
    Route::resource('libros', LibroController::class)->except('index', 'show');
+   Route::post('/favoritos/{libro}', [FavoritoController::class, 'toggle'])->name('favoritos.toggle');
+   Route::get('/favoritos', [FavoritoController::class, 'index'])->name('favoritos.index');
    Route::resource('valoraciones', ValoracionController::class);
    Route::resource('user', UserController::class);
    // Ruta encargada de cierre de sesión

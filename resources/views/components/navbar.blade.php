@@ -13,6 +13,7 @@
             @auth
                   <a href="{{route('user.show', Auth::user()->id)}}" class="block py-1 hover:text-[#004d42]">Mis datos</a>
                   <a href="{{ route('admin.libros.index')}}" class="block py-1 hover:text-[#004d42]">Administrar libros</a>
+                  <a href="{{ route('favoritos.index') }}" class="block py-1 hover:text-[#004d42]">Mis favoritos</a>
 
                   <hr class="my-2">
 

@@ -29,4 +29,8 @@ class Libro extends Model
    public function genre() {
       return $this->belongsTo(Genre::class);
    }
+
+   public function favoritoDe() {
+      return $this->belongsToMany(User::class, 'favoritos');
+   }
 }

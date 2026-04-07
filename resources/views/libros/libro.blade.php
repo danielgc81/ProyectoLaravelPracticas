@@ -21,9 +21,25 @@
          <div class="w-3xs">
             <img src="{{ asset($libro->image) }}" alt="Portada {{ $libro->title }}">
          </div>
-         <div class="mt-5 flex flex-col">
+         <div class="mt-5 flex flex-col items-center">
             @auth
-               <a href="{{route('valoraciones.create', ['libro_id' => $libro->id])}}" class="bg-[#ebab21] py-2 px-4 text-sm uppercase rounded-3xl hover:bg-[#e09520] transtion">Dejar mi opinión</a>
+               <a href="{{route('valoraciones.create', ['libro_id' => $libro->id])}}" class="bg-[#ebab21] py-2 text-center w-42.5 px-4 text-sm uppercase rounded-3xl hover:bg-[#e09520] transtion">Dejar mi opinión</a>
+               <form method="POST" action="{{ route('favoritos.toggle', $libro) }}">
+                  @csrf
+                  <button type="submit" class="mt-3 flex items-center gap-1.5 text-sm cursor-pointer">
+                     @if(auth()->user()->favoritos->contains($libro->id))
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-red-500" viewBox="0 0 24 24" fill="currentColor">
+                           <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                        </svg>
+                        <span class="text-red-500">Guardado en favoritos</span>
+                     @else
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-300" viewBox="0 0 24 24" fill="currentColor">
+                           <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                        </svg>
+                        <span class="text-gray-400">Añadir a favoritos</span>
+                     @endif
+                  </button>
+               </form>
             @endauth
             @guest
                <a href="{{route('valoraciones.create', ['libro_id' => $libro->id])}}" class="bg-[#ebab21] py-2 px-4 text-sm uppercase rounded-3xl pointer-events-none opacity-50">Dejar mi opinión</a>
@@ -78,7 +94,7 @@
             <div class="mt-4 mb-4 flex-1">
                <div class="flex text-2xl">
                   @for ($i = 1; $i <= 5; $i++)
-                     <span class="{{ $i <= $valoracion->estrellas ? 'text-[#f5a623]' : 'text-black'}}">★</span>
+                     <span class="{{ $i <= $valoracion->estrellas ? 'text-[#f5a623]' : 'text-gray-300'}}">★</span>
                   @endfor
                </div>
                <p>{{ $valoracion->comentario }}</p>
