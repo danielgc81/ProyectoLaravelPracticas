@@ -25,7 +25,7 @@ class LoginController extends Controller
 
       Auth::login($user);
 
-      return redirect()->route('libros.index');
+      return redirect()->route('welcome');
    }
 
    // Valida las credenciales y autentica al usuario
@@ -36,7 +36,7 @@ class LoginController extends Controller
 
       if (Auth::attempt($credentials, $remember)) {
          $request->session()->regenerate();
-         return redirect()->intended(route('libros.index'));
+         return redirect()->intended(route('welcome'));
       }
 
       return back()->withErrors([
