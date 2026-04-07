@@ -58,6 +58,36 @@ class GenreSeeder extends Seeder
             'name' => 'Romance',
             'image' => 'storage/géneros/Jh8aG70XKTwRKGXqSHXP0GsjrxIylcz4zaauNipx.webp',
             'description' => 'El romance es un género centrado en las relaciones amorosas y los vínculos emocionales entre sus personajes. Sus tramas exploran el encuentro, la atracción, los obstáculos y el desarrollo de una historia de amor que mantiene al lector emocionalmente comprometido de principio a fin. Abarca desde romances apasionados y dramáticos hasta historias más ligeras y luminosas, pero siempre con el amor como hilo conductor. Un género que apela directamente a las emociones y que encuentra lectores en todas las épocas y culturas.'
+         ],
+         [
+            'name' => 'Deportes',
+            'image' => 'storage/géneros/BOGY5q5YxxvaBBrxDBRrKUldnZ3c231kboyBVOcY.webp',
+            'description' => 'Los deportes son una temática centrada en la actividad física y la competición. Incluyen historias de superación, biografías de atletas y análisis de distintas disciplinas. También tratan valores como el esfuerzo, la constancia y el trabajo en equipo. Son ideales para quienes buscan motivación e inspiración.'
+         ],
+         [
+            'name' => 'Narrativa',
+            'image' => 'storage/géneros/LJaULb90CAQQ2TznEqDp4kpl6G9qQB6FlJzRF9ag.jpg',
+            'description' => 'La narrativa es una forma de contar historias a través de personajes y tramas. Puede ser ficción o basarse en hechos reales, abarcando múltiples estilos y géneros. Se estructura con inicio, desarrollo y desenlace. Es la base de la mayoría de novelas y relatos.',
+         ],
+         [
+            'name' => 'Programación',
+            'image' => 'storage/géneros/R8gIubQ2nz0I6Vts5K2gKOd2dfZ2GAziJUXJKs92.jpg',
+            'description' => 'La programación es un ámbito centrado en el desarrollo de software y la creación de aplicaciones. Incluye lenguajes de programación, algoritmos y buenas prácticas. Suele combinar teoría con ejercicios prácticos. Es fundamental en el mundo tecnológico actual.',
+         ],
+         [
+            'name' => 'Poesía',
+            'image' => 'storage/géneros/HjhWv9FqNUKCmiolrW7PdS6CRDoTVuP6PDDB7w8T.jpg',
+            'description' => 'La poesía es una forma de expresión que transmite emociones e ideas mediante un lenguaje artístico. Utiliza recursos como la rima, el ritmo y las metáforas. Puede tratar temas muy variados, desde lo cotidiano hasta lo profundo. Invita a una lectura más reflexiva.',
+         ],
+         [
+            'name' => 'Historia',
+            'image' => 'storage/géneros/VCD0bKYiTX5e6nhIEU9tvUrpI7V015lc1X1yam0H.webp',
+            'description' => 'La historia es la ciencia que estudia y relata los acontecimientos del pasado. Analiza civilizaciones, épocas y personajes relevantes. Permite entender cómo ha evolucionado la sociedad. Es clave para comprender el presente.'
+         ],
+         [
+            'name' => 'Teatro',
+            'image' => 'storage/géneros/mTp22wwHVGceVBSvAf1IbrAr6qyxIh0auqRuqSk6.jpg',
+            'description' => 'El teatro es una forma de expresión pensada para ser representada en un escenario. Se basa en diálogos entre personajes y acciones dramáticas. Puede incluir comedia, tragedia u otros estilos. Busca transmitir emociones a través de la interpretación.'
          ]
       ];
       DB::table('genres')->insert($genres);
