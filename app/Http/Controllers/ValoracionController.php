@@ -70,6 +70,7 @@ class ValoracionController extends Controller
     */
    public function destroy(Valoracion $valoracion)
    {
-      //
+      $valoracion->delete();
+      return back();
    }
 }

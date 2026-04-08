@@ -44,7 +44,7 @@ Route::middleware('auth')->group(function () {
    Route::resource('libros', LibroController::class)->except('index', 'show');
    Route::post('/favoritos/{libro}', [FavoritoController::class, 'toggle'])->name('favoritos.toggle');
    Route::get('/favoritos', [FavoritoController::class, 'index'])->name('favoritos.index');
-   Route::resource('valoraciones', ValoracionController::class);
+   Route::resource('valoraciones', ValoracionController::class)->except('destroy');
    Route::resource('user', UserController::class);
    // Ruta encargada de cierre de sesión
    Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
@@ -52,6 +52,7 @@ Route::middleware('auth')->group(function () {
 
 // Ruta solo User tipo Admin
 Route::middleware(['auth', 'admin'])->group(function () {
-      Route::resource('admin/libros', AdminLibroController::class)->names('admin.libros');
-      Route::resource('admin/genres', AdminGenreController::class)->names('admin.genres');
+   Route::resource('admin/libros', AdminLibroController::class)->names('admin.libros');
+   Route::resource('admin/genres', AdminGenreController::class)->names('admin.genres');
+   Route::delete('/valoraciones/{valoracion}', [ValoracionController::class, 'destroy'])->name('valoraciones.destroy');
 });

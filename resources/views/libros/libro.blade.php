@@ -98,6 +98,15 @@
                   @endfor
                </div>
                <p>{{ $valoracion->comentario }}</p>
+               @if(Auth::user()->esAdministrador())
+                  <form method="POST" action="{{ route('valoraciones.destroy', $valoracion) }}">
+                     @csrf
+                     @method('DELETE')
+                     <button type="submit" class="mt-2 text-xs text-red-500 hover:underline cursor-pointer">
+                           Eliminar
+                     </button>
+                  </form>
+               @endif
             </div>
          </article>
          @endforeach
