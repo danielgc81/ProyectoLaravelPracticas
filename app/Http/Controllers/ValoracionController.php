@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Valoracion\CreateValoracionRequest;
+use App\Models\Libro;
 use App\Models\Valoracion;
 use App\Services\ValoracionService;
 use Illuminate\Http\Request;
@@ -26,7 +27,8 @@ class ValoracionController extends Controller
     */
    public function create(Request $request)
    {
-      return view('valoraciones.creacion-form', ['valoracion' => new Valoracion(), 'libro_id' => $request->query('libro_id')]);
+      $libro = Libro::find($request->query('libro_id'));
+      return view('valoraciones.creacion-form', ['valoracion' => new Valoracion(), 'libro_id' => $request->query('libro_id'), 'libro' => $libro]);
    }
 
    /**
@@ -46,7 +48,8 @@ class ValoracionController extends Controller
     */
    public function show(Valoracion $valoracion)
    {
-
+      $valoracion->load('libro','user');
+      return view('valoraciones.valoracion', compact('valoracion'));
    }
 
    /**

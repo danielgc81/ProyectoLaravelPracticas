@@ -20,7 +20,7 @@ class ValoracionFactory extends Factory
         return [
             'user_id' => fake()->numberBetween(1, 20),
             'libro_id' => fake()->numberBetween(1, 20),
-            'comentario' => fake()->text(200),
+            'comentario' => fake()->paragraphs(3, true),
             'estrellas' => fake()->numberBetween(1, 5),
         ];
     }

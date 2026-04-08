@@ -44,7 +44,7 @@ Route::middleware('auth')->group(function () {
    Route::resource('libros', LibroController::class)->except('index', 'show');
    Route::post('/favoritos/{libro}', [FavoritoController::class, 'toggle'])->name('favoritos.toggle');
    Route::get('/favoritos', [FavoritoController::class, 'index'])->name('favoritos.index');
-   Route::resource('valoraciones', ValoracionController::class)->except('destroy');
+   Route::resource('valoraciones', ValoracionController::class)->except('destroy')->parameters(['valoraciones' => 'valoracion']); // Sino laravel pluraliza mal el español y tendria que usarse $valoracione
    Route::resource('user', UserController::class);
    // Ruta encargada de cierre de sesión
    Route::get('/logout', [LoginController::class, 'logout'])->name('logout');

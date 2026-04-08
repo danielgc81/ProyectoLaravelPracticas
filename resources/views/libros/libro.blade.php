@@ -97,16 +97,19 @@
                      <span class="{{ $i <= $valoracion->estrellas ? 'text-[#f5a623]' : 'text-gray-300'}}">★</span>
                   @endfor
                </div>
-               <p>{{ $valoracion->comentario }}</p>
-               @if(Auth::user()->esAdministrador())
-                  <form method="POST" action="{{ route('valoraciones.destroy', $valoracion) }}">
-                     @csrf
-                     @method('DELETE')
-                     <button type="submit" class="mt-2 text-xs text-red-500 hover:underline cursor-pointer">
-                           Eliminar
-                     </button>
-                  </form>
-               @endif
+               <p>{{ Str::limit($valoracion->comentario, 150) }}</p>
+               <div class="flex gap-4 items-center justify-end mr-4 mt-2">
+                  <a href="{{ route('valoraciones.show', $valoracion) }}" class="text-[#004d42] hover:underline text-xs cursor-pointer">Ver más</a>
+                  @if(Auth::user()->esAdministrador())
+                     <form method="POST" action="{{ route('valoraciones.destroy', $valoracion) }}" class="flex">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="text-xs text-red-500 hover:underline cursor-pointer">
+                              Eliminar
+                        </button>
+                     </form>
+                  @endif
+               </div>
             </div>
          </article>
          @endforeach
