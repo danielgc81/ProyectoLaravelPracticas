@@ -57,7 +57,12 @@ class ValoracionController extends Controller
     */
    public function edit(Valoracion $valoracion)
    {
-      //
+      if (Auth::user()->id !== $valoracion->user_id) {
+         abort(403, 'No tienes permiso para acceder a esta página.');
+      }
+
+      $libro = $valoracion->libro;
+      return view('valoraciones.edit', compact('valoracion', 'libro'));
    }
 
    /**
@@ -65,7 +70,18 @@ class ValoracionController extends Controller
     */
    public function update(Request $request, Valoracion $valoracion)
    {
-      //
+      if (Auth::user()->id !== $valoracion->user_id) {
+         abort(403, 'No tienes permiso para acceder a esta página.');
+      }
+
+      $request->validate([
+         'comentario' => 'required|string',
+         'estrellas'  => 'required|integer|min:1|max:5',
+      ]);
+
+      $valoracion->update($request->only('comentario', 'estrellas'));
+
+      return redirect()->route('libros.show', $valoracion->libro_id);
    }
 
    /**
@@ -73,6 +89,9 @@ class ValoracionController extends Controller
     */
    public function destroy(Valoracion $valoracion)
    {
+      if (!Auth::user()->esAdministrador() && Auth::user()->id !== $valoracion->user_id) {
+         abort(403, 'No tienes permiso para acceder a esta página');
+      }
       $valoracion->delete();
       return back();
    }

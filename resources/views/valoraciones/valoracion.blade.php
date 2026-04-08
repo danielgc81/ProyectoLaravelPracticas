@@ -21,7 +21,7 @@
       <div class="bg-gray-100 rounded-xl shadow-md w-[60%] max-w-2xl p-8 flex flex-col gap-6 mt-2">
          <div class="flex flex-col gap-1">
             <p class="font-bold text-xl">{{ $valoracion->user->name }}</p>
-            <p class="text-sm text-gray-400">{{ $valoracion->created_at->format('d/m/Y') }}</p>
+            <p class="text-sm text-gray-400">{{ $valoracion->created_at->format('d/m/Y H:i') }}</p>
             <div class="flex text-2xl">
                @for ($i = 1; $i <= 5; $i++)
                   <span class="{{ $i <= $valoracion->estrellas ? 'text-[#f5a623]' : 'text-gray-300' }}">★</span>
