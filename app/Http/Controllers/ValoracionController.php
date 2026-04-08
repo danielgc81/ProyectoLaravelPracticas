@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Valoracion\CreateValoracionRequest;
+use App\Models\Libro;
 use App\Models\Valoracion;
 use App\Services\ValoracionService;
 use Illuminate\Http\Request;
@@ -26,7 +27,8 @@ class ValoracionController extends Controller
     */
    public function create(Request $request)
    {
-      return view('valoraciones.creacion-form', ['valoracion' => new Valoracion(), 'libro_id' => $request->query('libro_id')]);
+      $libro = Libro::find($request->query('libro_id'));
+      return view('valoraciones.creacion-form', ['valoracion' => new Valoracion(), 'libro_id' => $request->query('libro_id'), 'libro' => $libro]);
    }
 
    /**
@@ -46,7 +48,8 @@ class ValoracionController extends Controller
     */
    public function show(Valoracion $valoracion)
    {
-
+      $valoracion->load('libro','user');
+      return view('valoraciones.valoracion', compact('valoracion'));
    }
 
    /**
@@ -54,7 +57,12 @@ class ValoracionController extends Controller
     */
    public function edit(Valoracion $valoracion)
    {
-      //
+      if (Auth::user()->id !== $valoracion->user_id) {
+         abort(403, 'No tienes permiso para acceder a esta página.');
+      }
+
+      $libro = $valoracion->libro;
+      return view('valoraciones.edit', compact('valoracion', 'libro'));
    }
 
    /**
@@ -62,7 +70,18 @@ class ValoracionController extends Controller
     */
    public function update(Request $request, Valoracion $valoracion)
    {
-      //
+      if (Auth::user()->id !== $valoracion->user_id) {
+         abort(403, 'No tienes permiso para acceder a esta página.');
+      }
+
+      $request->validate([
+         'comentario' => 'required|string',
+         'estrellas'  => 'required|integer|min:1|max:5',
+      ]);
+
+      $valoracion->update($request->only('comentario', 'estrellas'));
+
+      return redirect()->route('libros.show', $valoracion->libro_id);
    }
 
    /**
@@ -70,6 +89,10 @@ class ValoracionController extends Controller
     */
    public function destroy(Valoracion $valoracion)
    {
-      //
+      if (!Auth::user()->esAdministrador() && Auth::user()->id !== $valoracion->user_id) {
+         abort(403, 'No tienes permiso para acceder a esta página');
+      }
+      $valoracion->delete();
+      return back();
    }
 }

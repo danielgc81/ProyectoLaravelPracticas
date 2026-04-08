@@ -14,7 +14,7 @@ class FavoritoController extends Controller
 
    public function index()
    {
-      $libros = Auth::user()->favoritos()->with('genre')->withCount('valoraciones')->get();
+      $libros = Auth::user()->favoritos()->with('genre')->withCount('valoraciones')->withAvg('valoraciones', 'estrellas')->get();
       return view('favoritos.index', compact('libros'));
    }
 }
