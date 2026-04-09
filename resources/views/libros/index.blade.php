@@ -113,7 +113,7 @@
                      <div class="col-span-5 text-center py-16">
                         <p class="text-[#004d42] text-3xl font-bold">No se encontraron libros</p>
                         <p class="text-[#737373] text-sm mt-2 font-light">Prueba con otro título o autor</p>
-                        <a href="{{ route('libros.index') }}" class="inline-block mt-4 bg-[#004d42] text-white px-6 py-2 rounded-md text-sm uppercase hover:bg-[#003830] transition">
+                        <a href="{{ route('libros.index') }}" class="inline-block mt-4 bg-[#004d42] text-white px-6 py-2 rounded-3xl text-sm uppercase hover:bg-[#003830] transition">
                            Ver todos los libros
                         </a>
                      </div>
