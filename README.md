@@ -121,14 +121,20 @@ Abre Laravel Herd y vete a Sites->Add Site->Link existing project y seleccionas 
 
 | Ruta | Acceso | Descripción |
 |------|--------|-------------|
-| `/welcome` | Invitado | Página de bienvenida donde puedes viajar a `/login` o `/register` o hacia `/libros` |
-| `/login` | Invitado | Formulario de inicio de sesión |
-| `/register` | Invitado | Formulario de registro de usuario |
+| `/welcome` | Autenticado o Invitado | Página de bienvenida donde puedes viajar a `/libros` o `/generos` |
+| `/login` | Invitado | Formulario de inicio de sesión, se accede desde Mi Cuenta |
+| `/register` | Invitado | Formulario de registro de usuario, se accede desde Mi Cuenta |
 | `/libros` | Autenticado o Invitado | Lista todos los libros |
 | `/libros/{id}` | Autenticado o Invitado | Detalle de un libro concreto: Se accede a través del boton "Ver Libro" |
+| `/libros` | Autenticado o Invitado | Lista todos los géneros |
+| `/favoritos` | Autenticado | Lista todos los libros que un usuario haya marcado como favoritos en `/libros/{id}`, se accede desde Mi Cuenta  |
 | `/valoraciones/create?libro_id={id}` | Autenticado | Formulario para valorar un libro: Se accede a traves del boton "Dejar Mi Opinion" en `libros/{id}` |
+| `/mis-valoraciones` | Autenticado | Lista todos las valoraciones del usuario, aquí se puede ver las activas como las borradas y resturarlas, se accede a través de Mi Cuenta |
 | `/user/{id}` | Autenticado | Página donde el usuario puede ver sus datos y cambiar tanto su nombre, email y contraseña |
-| `/admin/libros` | Autenticado | Página donde el usuario puede administrar los libros y acceder a los formularios para editar o añadir libros |
-| `/admin/libros/{id}/edit` | Autenticado | Página donde el usuario puede editar un libro con los datos de este precargados |
-| `/admin/libros/create` | Autenticado | Página donde el usuario puede crear un nuevo libro |
+| `/admin/libros` | Autenticado y Admin | Página donde el usuario puede administrar los libros y acceder a los formularios para editar o añadir libros |
+| `/admin/libros/{id}/edit` | Autenticado y Admin | Página donde el usuario puede editar un libro con los datos de este precargados |
+| `/admin/libros/create` | Autenticado y Admin | Página donde el usuario puede crear un nuevo libro |
+| `/admin/genres` | Autenticado y Admin | Página donde el admin puede administrar los géneros y acceder a los formularios para editar o añadir géneros |
+| `/admin/genres/{id}/edit` | Autenticado y Admin | Página donde el admin puede editar un género con los datos de este precargados |
+| `/admin/genres/create` | Autenticado y Admin | Página donde el admin puede crear un nuevo género |
 
