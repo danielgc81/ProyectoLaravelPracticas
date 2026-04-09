@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->text('comentario')->nullable();
             $table->tinyInteger('estrellas')->unsigned();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

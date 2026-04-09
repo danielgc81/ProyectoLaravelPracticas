@@ -92,7 +92,11 @@ class ValoracionController extends Controller
       if (!Auth::user()->esAdministrador() && Auth::user()->id !== $valoracion->user_id) {
          abort(403, 'No tienes permiso para acceder a esta página');
       }
-      $valoracion->delete();
+      if (Auth::user()->id === $valoracion->user_id) {
+         $valoracion->delete();
+      } else if (Auth::user()->esAdministrador()) {
+         $valoracion->forceDelete();
+      }
       return back();
    }
 }

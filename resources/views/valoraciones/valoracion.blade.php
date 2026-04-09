@@ -35,6 +35,20 @@
             </p>
          </div>
          <p class="text-gray-600">{{ $valoracion->comentario }}</p>
+         <div class="flex gap-4 justify-end">
+            @if(Auth::user()->id === $valoracion->user_id)
+               <a href="{{ route('valoraciones.edit', $valoracion) }}" class="text-[#ebab21] hover:underline text-xs cursor-pointer">Editar</a>
+            @endif
+            @if(Auth::user()->esAdministrador() || Auth::user()->id === $valoracion->user_id)
+               <form method="POST" action="{{ route('valoraciones.destroy', $valoracion) }}" class="flex">
+                  @csrf
+                  @method('DELETE')
+                  <button type="submit" class="text-xs text-red-500 hover:underline cursor-pointer">
+                        Eliminar
+                  </button>
+               </form>
+            @endif
+         </div>
       </div>
    </section>
 </body>

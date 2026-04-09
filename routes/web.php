@@ -6,6 +6,7 @@ use App\Http\Controllers\LibroController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\FavoritoController;
 use App\Http\Controllers\ValoracionController;
+use App\Http\Controllers\MisValoracionesController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AdminLibroController;
@@ -44,8 +45,12 @@ Route::middleware('auth')->group(function () {
    Route::resource('libros', LibroController::class)->except('index', 'show');
    Route::post('/favoritos/{libro}', [FavoritoController::class, 'toggle'])->name('favoritos.toggle');
    Route::get('/favoritos', [FavoritoController::class, 'index'])->name('favoritos.index');
-   Route::resource('valoraciones', ValoracionController::class)->parameters(['valoraciones' => 'valoracion']); // Sino laravel pluraliza mal el español y tendria que usarse $valoracione
    Route::resource('user', UserController::class);
+   Route::resource('valoraciones', ValoracionController::class)->parameters(['valoraciones' => 'valoracion']); // Sino laravel pluraliza mal el español y tendria que usarse $valoracione
+   Route::get('/mis-valoraciones', [MisValoracionesController::class, 'index'])->name('mis-valoraciones.index');
+   Route::delete('/mis-valoraciones/{valoracion}/soft', [MisValoracionesController::class, 'softDelete'])->name('mis-valoraciones.soft-delete');
+   Route::patch('/mis-valoraciones/{valoracion}/restore', [MisValoracionesController::class, 'restore'])->name('mis-valoraciones.restore');
+   Route::delete('/mis-valoraciones/{valoracion}/force', [MisValoracionesController::class, 'forceDelete'])->name('mis-valoraciones.force-delete');
    // Ruta encargada de cierre de sesión
    Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 });
