@@ -16,6 +16,7 @@
                      <a href="{{ route('admin.libros.index')}}" class="block py-1 hover:text-[#004d42]">Administrar libros</a>
                   @endif
                   <a href="{{ route('favoritos.index') }}" class="block py-1 hover:text-[#004d42]">Mis favoritos</a>
+                  <a href="{{ route('mis-valoraciones.index') }}" class="block py-1 hover:text-[#004d42]">Mis valoraciones</a>
 
                   <hr class="my-2">
 
